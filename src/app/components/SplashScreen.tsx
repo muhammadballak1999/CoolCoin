@@ -3,7 +3,8 @@ import Image from "next/image"
 import anime from "animejs"
 import EmojiLarge from '@/app/assets/emoji-large.svg';
 
-const SplashScreen = ({ finishLoading }) => {
+export const SplashScreen = ({ finishLoading }) => {
+  
   const [isMounted, setIsMounted] = useState(false)
   const animate = () => {
     const loader = anime.timeline({
@@ -62,5 +63,3 @@ const SplashScreen = ({ finishLoading }) => {
     </div>
   )
 }
-
-export default SplashScreen
