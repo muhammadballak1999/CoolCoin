@@ -40,8 +40,12 @@ export default function RootLayout({
           <SplashScreen finishLoading={() => setIsLoading(false)} />
         ) : (
           <>
-            {children}
-            <BottomNavigationBar />
+            <div>
+              {children}
+            </div>
+            <div>
+              <BottomNavigationBar />
+            </div>
           </>
         )}
       </body>
