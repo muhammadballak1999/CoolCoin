@@ -40,10 +40,10 @@ export default function RootLayout({
           <SplashScreen finishLoading={() => setIsLoading(false)} />
         ) : (
           <>
-            <div>
+            <div className="h-[92%] overflow-auto">
               {children}
             </div>
-            <div>
+            <div className="h-[8%] flex items-center">
               <BottomNavigationBar />
             </div>
           </>

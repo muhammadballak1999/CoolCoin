@@ -18,7 +18,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  overflow: hidden;
+  // overflow: hidden;
+  height: 100vh;
+  max-height: 100vh;
 }
 
 @layer utilities {
@@ -35,4 +37,8 @@ body {
   div {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
+}
+
+main {
+  height: -webkit-fill-available;
 }
