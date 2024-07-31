@@ -42,12 +42,16 @@ export default function RootLayout({
           <>
             <div className="h-[92%] overflow-auto">
               {children}
+              <div className="stars"></div>
+              <div className="twinkling"></div>
+              <div className="clouds"></div>
             </div>
             <div className="h-[8%] flex items-center">
               <BottomNavigationBar />
             </div>
           </>
         )}
+
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ export const BottomNavigationBar = () => {
   const [inActiveClassSpan, setInActiveClassSpan] = useState('text-nowrap text-xs text-gray-500 dark:text-gray-400');
 
   return (
-    <div className="absolute bottom-0 w-full bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+    <div className="absolute bottom-0 w-full bg-transparent z-10">
     <div className="flex items-center justify-center gap-2 h-full max-w-lg grid-cols-4 mx-auto font-medium">
         <Link href="/" className="mt-2 flex items-center justify-center">
           <button type="button" className="inline-flex flex-col items-center justify-center px-5 group">

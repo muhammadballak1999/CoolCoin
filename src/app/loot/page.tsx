@@ -8,9 +8,9 @@ export default function Loot() {
   const array = [0, 1, 2, 3, 4, 5, 6, 8];
 
   return (
-    <main className="flex flex-col items-center p-5 relative border">
+    <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10 h-fill">
       <Statistics />
-      <div className="w-full border mt-3 p-2 overflow-auto rounded-md h-[100%]">
+      <div className="w-full mt-3 p-2 overflow-auto rounded-md h-fill">
         
       {
             array.map((i) => {

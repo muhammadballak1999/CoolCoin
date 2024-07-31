@@ -19,13 +19,13 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col items-center p-5 relative">
+      <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10">
         <Statistics />
         { isRolled ? (
           <ClaimCard />
         ) : (
-          <div className="flex items-center justify-center border w-full rounded-md mt-2" style={{ height: windowsSize.height ? windowsSize.height/2.25 : 0 }} onClick={() => setIsRolled(!isRolled)}>
-            <div className="bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40">
+          <div className="flex items-center justify-center w-full rounded-md mt-2" style={{ height: windowsSize.height ? windowsSize.height/2.25 : 0 }} onClick={() => setIsRolled(!isRolled)}>
+            <div className="bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black">
               Roll
             </div>
           </div>
