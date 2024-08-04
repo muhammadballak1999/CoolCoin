@@ -4,7 +4,12 @@ import CharacterToClaim from '@/app/assets/character-to-claim.png'
 import { Button } from "flowbite-react";
 import CharacterNameBackground from '@/app/assets/character-name-background.png';
 
-export const SellSendCard = ({ sell, send }) => {
+interface IProps {
+  sell: () => void;
+  send: () => void;
+}
+
+export const SellSendCard = (props: IProps) => {
     return (
       <div className="flex w-fit rounded-md mt-4">
         <div className="flex flex-col w-full items-center justify-between rounded-md">
@@ -34,8 +39,8 @@ export const SellSendCard = ({ sell, send }) => {
             </div>
           </div>
           <div className="flex items-center justify-between gap-1 w-full">
-           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={sell}>Sell</button>
-           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={send}>Send</button>
+           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.sell}>Sell</button>
+           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.send}>Send</button>
           </div>
         </div>
       </div> 

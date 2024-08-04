@@ -35,6 +35,7 @@ export const ClaimModal = React.forwardRef((props, modalRef) => {
 
   return (
     <>
+       {/* @ts-ignore */}
       <Button ref={modalRef} className="hidden" onClick={open}></Button>
       <Modal show={openModal} className={openModal ? 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 z-10' : 'closed' } onClose={() => setOpenModal(false)} dismissible onClick={close}>
         <Modal.Body className="p-20 z-10">

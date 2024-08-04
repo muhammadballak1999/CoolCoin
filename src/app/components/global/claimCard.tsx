@@ -5,7 +5,11 @@ import { Button } from "flowbite-react";
 import CharacterNameBackground from '@/app/assets/character-name-background.png';
 import { CountdownTimer } from '@/app/components/global/countdown';
 
-export const ClaimCard = ({ rollAgain, claim }) => {
+interface IProps {
+  rollAgain: () => void;
+  claim: () => void;
+}
+export const ClaimCard = (props: IProps) => {
     return (
       <div className="flex w-fit rounded-md mt-4">
         <div className="flex flex-col w-full items-center justify-between rounded-md">
@@ -35,12 +39,12 @@ export const ClaimCard = ({ rollAgain, claim }) => {
             </div>
           </div>
           <div className="flex items-center justify-between gap-1 w-full">
-           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={rollAgain}>Roll again</button>
+           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.rollAgain}>Roll again</button>
            <div className='flex flex-col items-center mt-3'>
-             <span className='text-[10px] text-gray-400'><CountdownTimer seconds={30} /></span>
+             <span className='text-[10px] text-gray-400'><CountdownTimer seconds={30} onFinish={()=> {}} /></span>
              <span className='text-[10px] text-gray-400'>Remaining to claim</span>
            </div>
-           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={claim}>Claim</button>
+           <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.claim}>Claim</button>
           </div>
         </div>
       </div> 

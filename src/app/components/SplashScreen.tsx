@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
+// @ts-ignore
 import anime from "animejs"
 import EmojiLarge from '@/app/assets/emoji-large.svg';
 
-export const SplashScreen = ({ finishLoading }) => {
+interface IProps {
+  finishLoading: () => void;
+}
+
+export const SplashScreen = (props: IProps) => {
   
   const [isMounted, setIsMounted] = useState(false)
   const animate = () => {
     const loader = anime.timeline({
-      complete: () => finishLoading(),
+      complete: () => props.finishLoading(),
     })
 
     loader
@@ -53,7 +58,7 @@ export const SplashScreen = ({ finishLoading }) => {
     const timeout = setTimeout(() => setIsMounted(true), 10)
     animate()
     return () => clearTimeout(timeout)
-  }, [])
+  })
 
   return (
     <div
