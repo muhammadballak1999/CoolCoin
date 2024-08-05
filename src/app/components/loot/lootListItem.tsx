@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image"
 import Goku from '@/app/assets/goku.jpg';
+import { CountdownTimer } from "@/app/components/global/countdown";
+import { TimedClaimButton } from "./timedClaimButton";
 
 
-export const LootListItem = (props: { i: React.Key | null | undefined; }) => {
+// eslint-disable-next-line react/display-name
+export const LootListItem = React.memo((props: { i: React.Key | null | undefined; }) => {
 
-  const claimClasses = 'bg-green-500 dark:bg-green-500 dark:hover:bg-green-400 dark:focus:ring-green-400 dark:border-green-400';
-  const unclaimClasses = 'bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
   const [claimed, setClaimed] = useState(false);
+  const [unClaimed, setUnClaimed] = useState(false);
+
+  const claim = () => {
+    setClaimed(true);
+  }
+
+  const TimedButton= () => {
+    return (
+      claimed ?
+        <button type="button" className={'h-8 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 font-medium rounded-3xl text-xs p-2 bg-green-500 dark:bg-green-500 dark:hover:bg-green-400 dark:focus:ring-green-400 dark:border-green-400'}>Claimed</button>
+        : 
+        <TimedClaimButton  seconds={5} onClick={claim} />
+    )
+  }
 
   return (
     <div key={props.i} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md">
@@ -25,9 +40,7 @@ export const LootListItem = (props: { i: React.Key | null | undefined; }) => {
       )
     }
     {
-      (props.i == 3) && (
-        <button type="button" className={`h-8 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 font-medium rounded-3xl text-xs p-2 ${claimed ? claimClasses : unclaimClasses}`} onClick={() => setClaimed(!claimed)}>{ !claimed ? `Claim - ${props.i}s` : 'Claimed'}</button>
-      )
+      (props.i == 3) && <TimedButton />
     } 
 
     {
@@ -39,4 +52,4 @@ export const LootListItem = (props: { i: React.Key | null | undefined; }) => {
     <span className="font-bold pr-3">{ props.i }</span>
   </div>
   )
-}
+})

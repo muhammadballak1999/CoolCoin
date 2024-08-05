@@ -41,8 +41,7 @@ export const ClaimCard = (props: IProps) => {
           <div className="flex items-center justify-between gap-1 w-full">
            <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.rollAgain}>Roll again</button>
            <div className='flex flex-col items-center mt-3'>
-             <span className='text-[10px] text-gray-400'><CountdownTimer seconds={30} onFinish={()=> {}} /></span>
-             <span className='text-[10px] text-gray-400'>Remaining to claim</span>
+             <CountdownTimer seconds={30} onFinish={()=> {}} />
            </div>
            <button type="button" className="mt-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.claim}>Claim</button>
           </div>

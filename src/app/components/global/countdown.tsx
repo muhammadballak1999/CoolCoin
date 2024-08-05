@@ -2,27 +2,36 @@ import React from 'react';
 import Countdown from 'react-countdown';
 
 interface IProps {
-    seconds: number,
+    seconds: number;
+    completionText?: string;
     onFinish: () => void;
   }
+  
 
 // Random component
-const Completionist = () => <span>Lost your chance</span>;
 
-export const CountdownTimer = (props: IProps) => {
+// eslint-disable-next-line react/display-name
+export const CountdownTimer = React.memo((props: IProps) => {
+
+    const Completionist = () => <span className='text-[10px] text-gray-400'>{props.completionText || 'Lost your chance'}</span>;
+
     return (
     <Countdown
         date={Date.now() + (props.seconds * 1000)}
         renderer={({ seconds, completed }) => {
+            
             if (completed) {
               props.onFinish();
               // Render a completed state
               return <Completionist />;
             } else {
               // Render a countdown
-              return <span>{seconds}s</span>;
+              return <>
+                       <span className='text-[10px] text-gray-400'>{seconds}s</span>
+                       <span className='text-[10px] text-gray-400'>Remaning to claim</span>
+                    </>;
             }
         }}
     />
     );
-}
+});
