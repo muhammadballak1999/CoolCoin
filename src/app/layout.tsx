@@ -26,6 +26,7 @@ export default function RootLayout({
 
   const isHome = pathName === "/"
   const [isLoading, setIsLoading] = useState(isHome)
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (isLoading) {
@@ -33,24 +34,72 @@ export default function RootLayout({
     }
   }, [isLoading])
 
+  useEffect(() => {
+      // @ts-ignore
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+      // Indicate that the app is ready
+      // @ts-ignore
+      Telegram.WebApp.ready();
+
+      // Extract initData (contains the authentication data)
+      // @ts-ignore
+      const initData = Telegram.WebApp.initData;
+
+      // You can also parse initData into an object if needed
+      const params = new URLSearchParams(initData);
+      const user = {
+        id: params.get('user_id'),
+        auth_date: params.get('auth_date'),
+        hash: params.get('hash'),
+      };
+
+      // @ts-ignore
+      setUserData(user);
+      alert(user);
+
+      // Send this data to the backend
+      // fetch('/api/auth', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ initData }),
+      // })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     if (data.success) {
+      //       console.log('User authenticated successfully');
+      //     } else {
+      //       console.error('Authentication failed');
+      //     }
+      //   })
+      //   .catch(error => console.error('Error:', error));
+    }
+  }, []);
+
+  const Content = () => {
+    return (
+      isLoading && isHome ? (
+        <SplashScreen finishLoading={() => setIsLoading(false)} />
+      ) : (
+        <>
+          <div className="h-[92%] overflow-auto">
+            {children}
+            <div className="stars"></div>
+            <div className="twinkling"></div>
+            <div className="clouds"></div>
+          </div>
+          <div className="h-[8%] flex items-center">
+            <BottomNavigationBar />
+          </div>
+        </>
+      )
+    )
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        {isLoading && isHome ? (
-          <SplashScreen finishLoading={() => setIsLoading(false)} />
-        ) : (
-          <>
-            <div className="h-[92%] overflow-auto">
-              {children}
-              <div className="stars"></div>
-              <div className="twinkling"></div>
-              <div className="clouds"></div>
-            </div>
-            <div className="h-[8%] flex items-center">
-              <BottomNavigationBar />
-            </div>
-          </>
-        )}
 
       </body>
     </html>
