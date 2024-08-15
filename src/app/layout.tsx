@@ -34,48 +34,48 @@ export default function RootLayout({
     }
   }, [isLoading])
 
-  useEffect(() => {
-      // @ts-ignore
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-      // Indicate that the app is ready
-      // @ts-ignore
-      Telegram.WebApp.ready();
+  // useEffect(() => {
+  //     // @ts-ignore
+  //   if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+  //     // Indicate that the app is ready
+  //     // @ts-ignore
+  //     Telegram.WebApp.ready();
 
-      // Extract initData (contains the authentication data)
-      // @ts-ignore
-      const initData = Telegram.WebApp.initData;
+  //     // Extract initData (contains the authentication data)
+  //     // @ts-ignore
+  //     const initData = Telegram.WebApp.initData;
 
-      // You can also parse initData into an object if needed
-      const params = new URLSearchParams(initData);
-      const user = {
-        id: params.get('user_id'),
-        auth_date: params.get('auth_date'),
-        hash: params.get('hash'),
-      };
+  //     // You can also parse initData into an object if needed
+  //     const params = new URLSearchParams(initData);
+  //     const user = {
+  //       id: params.get('user_id'),
+  //       auth_date: params.get('auth_date'),
+  //       hash: params.get('hash'),
+  //     };
 
-      // @ts-ignore
-      setUserData(user);
-      alert(user);
+  //     // @ts-ignore
+  //     setUserData(user);
+  //     alert(user);
 
-      // Send this data to the backend
-      // fetch('/api/auth', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ initData }),
-      // })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     if (data.success) {
-      //       console.log('User authenticated successfully');
-      //     } else {
-      //       console.error('Authentication failed');
-      //     }
-      //   })
-      //   .catch(error => console.error('Error:', error));
-    }
-  }, []);
+  //     // Send this data to the backend
+  //     // fetch('/api/auth', {
+  //     //   method: 'POST',
+  //     //   headers: {
+  //     //     'Content-Type': 'application/json',
+  //     //   },
+  //     //   body: JSON.stringify({ initData }),
+  //     // })
+  //     //   .then(response => response.json())
+  //     //   .then(data => {
+  //     //     if (data.success) {
+  //     //       console.log('User authenticated successfully');
+  //     //     } else {
+  //     //       console.error('Authentication failed');
+  //     //     }
+  //     //   })
+  //     //   .catch(error => console.error('Error:', error));
+  //   }
+  // }, []);
 
   const Content = () => {
     return (
@@ -100,7 +100,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-
+        <Content />
       </body>
     </html>
   );
