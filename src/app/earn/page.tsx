@@ -1,5 +1,5 @@
 "use client";
-import { Statistics } from "../components/global/statistics";
+import { Statistics } from "../components/global/Statistics";
 
 
 export default function Earn() {

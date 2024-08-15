@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image"
 import Goku from '../../assets/goku.jpg';
-import { CountdownTimer } from "../global/countdown";
-import { TimedClaimButton } from "./timedClaimButton";
+import { CountdownTimer } from "../global/Countdown";
+import { TimedClaimButton } from "./TimedClaimButton";
 
 
 // eslint-disable-next-line react/display-name

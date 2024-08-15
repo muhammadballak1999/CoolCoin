@@ -1,8 +1,8 @@
 "use client";
-import { Statistics } from "../components/global/statistics";
+import { Statistics } from "../components/global/Statistics";
 import Image from "next/image"
 import Goku from '../assets/goku.jpg';
-import { SellSendCard } from "../components/global/sellSendCard";
+import { SellSendCard } from "../components/global/SellSendCard";
 import { useState } from "react";
 
 export default function MyCollection() {

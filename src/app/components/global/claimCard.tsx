@@ -3,7 +3,7 @@ import Image from 'next/image'
 import CharacterToClaim from '../../assets/character-to-claim.png'
 import { Button } from "flowbite-react";
 import CharacterNameBackground from '../../assets/character-name-background.png';
-import { CountdownTimer } from '../global/countdown';
+import { CountdownTimer } from './Countdown';
 
 interface IProps {
   rollAgain: () => void;
