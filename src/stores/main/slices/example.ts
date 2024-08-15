@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
 
-import { CommonStoreState, actionWrapper } from '@/stores/common';
+import { CommonStoreState, actionWrapper } from '../../common';
 
 export interface ExampleSliceState extends CommonStoreState {
   count: number;

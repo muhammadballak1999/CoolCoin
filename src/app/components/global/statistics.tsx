@@ -1,10 +1,8 @@
 
 
 import Image from "next/image";
-import { useExampleStore } from '@/stores'
-
-import EmojiSmall from '@/app/assets/emoji-small.svg';
-import EmojiMedium from '@/app/assets/emoji-medium.svg';
+import EmojiSmall from '../../assets/emoji-small.svg';
+import EmojiMedium from '../../assets/emoji-medium.svg';
 
 export const Statistics = () => {
     return (

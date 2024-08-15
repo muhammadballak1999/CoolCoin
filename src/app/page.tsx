@@ -1,10 +1,10 @@
 "use client";
 
-import { Statistics } from "@/app/components/global/statistics";
-import { useWindowSize } from "@/app/hooks/useWindowsSize";
+import { Statistics } from "./components/global/statistics";
+import { useWindowSize } from "./hooks/useWindowsSize";
 import { useEffect, useRef, useState } from "react";
-import { ClaimModal } from "@/app/components/modals/claimModal";
-import { ClaimCard } from "@/app/components/global/claimCard";
+import { ClaimModal } from "./components/modals/claimModal";
+import { ClaimCard } from "./components/global/claimCard";
 import lottie from 'lottie-web';
 
 export default function Home() {

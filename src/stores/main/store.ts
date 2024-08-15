@@ -2,11 +2,11 @@ import { create } from 'zustand';
 
 import {
   ExampleSliceState,
-} from '@/stores/main/slices';
+} from './slices';
 
 import {
   createExampleSlice,
-} from '@/stores/main/slices';
+} from './slices';
 
 export const useExampleStore = create<ExampleSliceState>((...a) => ({
   ...createExampleSlice(...a),

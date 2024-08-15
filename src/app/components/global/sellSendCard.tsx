@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image'
-import CharacterToClaim from '@/app/assets/character-to-claim.png'
+import CharacterToClaim from '../../assets/character-to-claim.png'
 import { Button } from "flowbite-react";
-import CharacterNameBackground from '@/app/assets/character-name-background.png';
+import CharacterNameBackground from '../../assets/character-name-background.png';
 
 interface IProps {
   sell: () => void;

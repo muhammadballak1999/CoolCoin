@@ -5,8 +5,8 @@ import "./globals.scss";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
-import { SplashScreen } from "@/app/components/splashScreen";
-import { BottomNavigationBar } from "@/app/components/bottomNavigationBar";
+import { SplashScreen } from "./components/splashScreen";
+import { BottomNavigationBar } from "./components/bottomNavigationBar";
 
 const inter = Inter({ subsets: ["latin"] });
 

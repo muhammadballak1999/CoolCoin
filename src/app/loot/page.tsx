@@ -1,8 +1,8 @@
 "use client";
-import { Statistics } from "@/app/components/global/statistics";
+import { Statistics } from "../components/global/statistics";
 import { useState } from "react";
-import { SellSendCard } from "@/app/components/global/sellSendCard";
-import { LootListItem } from "@/app/components/loot/lootListItem";
+import { SellSendCard } from "../components/global/sellSendCard";
+import { LootListItem } from "../components/loot/lootListItem";
 
 export default function Loot() {
 

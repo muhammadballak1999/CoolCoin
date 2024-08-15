@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image"
-import Goku from '@/app/assets/goku.jpg';
-import { CountdownTimer } from "@/app/components/global/countdown";
+import Goku from '../../assets/goku.jpg';
+import { CountdownTimer } from "../global/countdown";
 import { TimedClaimButton } from "./timedClaimButton";
 
 

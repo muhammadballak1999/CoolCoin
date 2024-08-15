@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import Image from "next/image"
 // @ts-ignore
 import anime from "animejs"
-import EmojiLarge from '@/app/assets/emoji-large.svg';
+import EmojiLarge from '../assets/emoji-large.svg';
 
 interface IProps {
   finishLoading: () => void;
