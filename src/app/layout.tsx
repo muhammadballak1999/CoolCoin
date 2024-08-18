@@ -36,6 +36,8 @@ export default function RootLayout({
 
   useEffect(() => {
       // @ts-ignore
+    alert(Telegram)
+      // @ts-ignore
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
       // Indicate that the app is ready
       // @ts-ignore
