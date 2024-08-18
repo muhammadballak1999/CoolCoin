@@ -54,6 +54,8 @@ export default function RootLayout({
           // @ts-ignore
           setUserData(user);
           console.log('user', user);
+          console.log('params', params);
+          console.log('initData', initData);
         };
         document.head.appendChild(script);
       }
