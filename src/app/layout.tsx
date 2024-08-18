@@ -28,13 +28,29 @@ export default function RootLayout({
   const [isLoading, setIsLoading] = useState(isHome)
   const [userData, setUserData] = useState(null);
 
+
   useEffect(() => {
-    // @ts-ignore
-    alert(window.Telegram)
-    if (isLoading) {
-      return
-    }
-  }, [isLoading])
+    // Dynamically load the Telegram Web Apps SDK
+    const loadTelegramSdk = () => {
+      // @ts-ignore
+      if (typeof window !== 'undefined' && typeof Telegram === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://telegram.org/js/telegram-web-app.js';
+        script.async = true;
+        script.onload = () => {
+          // Initialize the Telegram Web App when the SDK is loaded
+          // @ts-ignore
+          window.Telegram.WebApp.ready();
+          // You can now access the Telegram object and perform operations
+          // @ts-ignore
+          console.log('Telegram Web App is ready', window.Telegram.WebApp);
+        };
+        document.head.appendChild(script);
+      }
+    };
+
+    loadTelegramSdk();
+  }, []);
 
   // useEffect(() => {
   //     // @ts-ignore
