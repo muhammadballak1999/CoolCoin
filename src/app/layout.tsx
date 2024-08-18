@@ -46,17 +46,14 @@ export default function RootLayout({
           const initData = window.Telegram.WebApp.initData;
           const params = new URLSearchParams(initData);
           const user = {
-            id: params.get('user_id'),
-            auth_date: params.get('auth_date'),
-            name: `${params.get('firs_name')} ${params.get('last_name')}`,
+          // @ts-ignore
+            ...window.Telegram.WebApp.initDataUnsafe?.user,
             hash: params.get('hash'),
           };
 
           // @ts-ignore
           setUserData(user);
           console.log('user', user);
-          console.log('params', params);
-          console.log('initData', initData);
         };
         document.head.appendChild(script);
       }
