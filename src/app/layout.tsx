@@ -60,22 +60,22 @@ export default function RootLayout({
       alert(user);
 
       // Send this data to the backend
-      fetch('/api/auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ initData }),
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            console.log('User authenticated successfully');
-          } else {
-            console.error('Authentication failed');
-          }
-        })
-        .catch(error => console.error('Error:', error));
+    //   fetch('/api/auth', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ initData }),
+    //   })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       if (data.success) {
+    //         console.log('User authenticated successfully');
+    //       } else {
+    //         console.error('Authentication failed');
+    //       }
+    //     })
+    //     .catch(error => console.error('Error:', error));
     }
   }, []);
 
