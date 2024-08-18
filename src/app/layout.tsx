@@ -108,7 +108,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* @ts-igonre */}
+        {/* @ts-ignore */}
         <span>{ Telegram }</span>
         {/* <Content /> */}
       </body>
