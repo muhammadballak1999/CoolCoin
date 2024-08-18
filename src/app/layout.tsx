@@ -48,6 +48,7 @@ export default function RootLayout({
           const user = {
             id: params.get('user_id'),
             auth_date: params.get('auth_date'),
+            name: `${params.get('firs_name')} ${params.get('last_name')}`,
             hash: params.get('hash'),
           };
 
