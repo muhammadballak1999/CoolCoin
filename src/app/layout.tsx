@@ -108,6 +108,7 @@ export default function RootLayout({
   // }, []);
 
   const verifyUser = (telegramToken: string) => {
+      console.log('token', `JWT ${telegramToken}`)
       fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
         method: 'POST',
         headers: {
