@@ -54,6 +54,8 @@ export default function RootLayout({
           // @ts-ignore
           setUserData(user);
           console.log('user', user);
+
+          verifyUser(params.get('hash')!);
         };
         document.head.appendChild(script);
       }
@@ -104,6 +106,26 @@ export default function RootLayout({
   //     //   .catch(error => console.error('Error:', error));
   //   }
   // }, []);
+
+  const verifyUser = (telegramToken: string) => {
+      fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
+        method: 'POST',
+        headers: {
+          'Authorization': telegramToken,
+          'Content-Type': 'application/json',
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('data', data)
+            console.log('User authenticated successfully');
+          } else {
+            console.error('Authentication failed');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+  }
 
   const Content = () => {
     return (
