@@ -84,8 +84,6 @@ export default function RootLayout({
       ) : (
         <>
           <div className="h-[92%] overflow-auto">
-            {/* @ts-ignore */}
-            <span>{window.Telegram}</span>
             {children}
             <div className="stars"></div>
             <div className="twinkling"></div>
@@ -94,6 +92,8 @@ export default function RootLayout({
           <div className="h-[8%] flex items-center">
             <BottomNavigationBar />
           </div>
+          {/* @ts-ignore */}
+          <span>{window.Telegram}</span>
         </>
       )
     )
