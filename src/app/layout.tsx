@@ -109,8 +109,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* @ts-ignore */}
-        <span>{ Telegram }</span>
-        {/* <Content /> */}
+        { isTelegram() ? <span>{ Telegram }</span> : <Content /> }
       </body>
     </html>
   );
