@@ -34,68 +34,58 @@ export default function RootLayout({
     }
   }, [isLoading])
 
-  useEffect(() => {
-    window.onerror = function(msg, url, linenumber) {
-        alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-        return true;
-    }
-      // @ts-ignore
-    alert(Telegram)
-      // @ts-ignore
-    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-      // Indicate that the app is ready
-      // @ts-ignore
-      Telegram.WebApp.ready();
+  // useEffect(() => {
+  //     // @ts-ignore
+  //   if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+  //     // Indicate that the app is ready
+  //     // @ts-ignore
+  //     window.Telegram.WebApp.ready();
 
-      // Extract initData (contains the authentication data)
-      // @ts-ignore
-      const initData = Telegram.WebApp.initData;
+  //     // Extract initData (contains the authentication data)
+  //     // @ts-ignore
+  //     const initData = window.Telegram.WebApp.initData;
 
-      // You can also parse initData into an object if needed
-      const params = new URLSearchParams(initData);
-      const user = {
-        id: params.get('user_id'),
-        auth_date: params.get('auth_date'),
-        hash: params.get('hash'),
-      };
+  //     // You can also parse initData into an object if needed
+  //     const params = new URLSearchParams(initData);
+  //     const user = {
+  //       id: params.get('user_id'),
+  //       auth_date: params.get('auth_date'),
+  //       hash: params.get('hash'),
+  //     };
 
-      // @ts-ignore
-      setUserData(user);
-      alert(user);
+  //     // @ts-ignore
+  //     setUserData(user);
+  //     alert(user);
 
-      // Send this data to the backend
-    //   fetch('/api/auth', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ initData }),
-    //   })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       if (data.success) {
-    //         console.log('User authenticated successfully');
-    //       } else {
-    //         console.error('Authentication failed');
-    //       }
-    //     })
-    //     .catch(error => console.error('Error:', error));
-    }
-  }, []);
-
-  const isTelegram = () => {
-    // @ts-ignore
-    return typeof Telegram !== 'undefined' && Telegram.WebApp;
-  }
+  //     // Send this data to the backend
+  //     // fetch('/api/auth', {
+  //     //   method: 'POST',
+  //     //   headers: {
+  //     //     'Content-Type': 'application/json',
+  //     //   },
+  //     //   body: JSON.stringify({ initData }),
+  //     // })
+  //     //   .then(response => response.json())
+  //     //   .then(data => {
+  //     //     if (data.success) {
+  //     //       console.log('User authenticated successfully');
+  //     //     } else {
+  //     //       console.error('Authentication failed');
+  //     //     }
+  //     //   })
+  //     //   .catch(error => console.error('Error:', error));
+  //   }
+  // }, []);
 
   const Content = () => {
     return (
-      isTelegram() ?
       isLoading && isHome ? (
         <SplashScreen finishLoading={() => setIsLoading(false)} />
       ) : (
         <>
           <div className="h-[92%] overflow-auto">
+            {/* @ts-ignore */}
+            <span>{window.Telegram}</span>
             {children}
             <div className="stars"></div>
             <div className="twinkling"></div>
@@ -105,15 +95,14 @@ export default function RootLayout({
             <BottomNavigationBar />
           </div>
         </>
-      ) : <></>
+      )
     )
   }
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* @ts-ignore */}
-        { isTelegram() ? <span>{ Telegram }</span> : <Content /> }
+        <Content />
       </body>
     </html>
   );
