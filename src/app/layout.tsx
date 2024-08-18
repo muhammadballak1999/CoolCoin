@@ -35,6 +35,10 @@ export default function RootLayout({
   }, [isLoading])
 
   useEffect(() => {
+    window.onerror = function(msg, url, linenumber) {
+        alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+        return true;
+    }
       // @ts-ignore
     alert(Telegram)
       // @ts-ignore
