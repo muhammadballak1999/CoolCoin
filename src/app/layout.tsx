@@ -29,6 +29,8 @@ export default function RootLayout({
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    // @ts-ignore
+    alert(window.Telegram)
     if (isLoading) {
       return
     }
@@ -92,8 +94,6 @@ export default function RootLayout({
           <div className="h-[8%] flex items-center">
             <BottomNavigationBar />
           </div>
-          {/* @ts-ignore */}
-          <span>{window.Telegram}</span>
         </>
       )
     )
