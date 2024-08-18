@@ -43,7 +43,17 @@ export default function RootLayout({
           window.Telegram.WebApp.ready();
           // You can now access the Telegram object and perform operations
           // @ts-ignore
-          console.log('Telegram Web App is ready', window.Telegram.WebApp);
+          const initData = window.Telegram.WebApp.initData;
+          const params = new URLSearchParams(initData);
+          const user = {
+            id: params.get('user_id'),
+            auth_date: params.get('auth_date'),
+            hash: params.get('hash'),
+          };
+
+          // @ts-ignore
+          setUserData(user);
+          console.log('user', user);
         };
         document.head.appendChild(script);
       }
