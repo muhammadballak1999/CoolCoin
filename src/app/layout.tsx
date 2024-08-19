@@ -114,6 +114,7 @@ export default function RootLayout({
       fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         mode: 'no-cors',
