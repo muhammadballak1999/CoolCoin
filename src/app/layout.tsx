@@ -118,7 +118,7 @@ export default function RootLayout({
           'Content-Type': 'application/json',
         },
         mode: 'no-cors',
-        body: JSON.stringify(data)
+        body: JSON.parse(JSON.stringify(data))
       })
         .then(response => response.json())
         .then(data => {
