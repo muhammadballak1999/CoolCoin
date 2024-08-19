@@ -111,14 +111,15 @@ export default function RootLayout({
   // @ts-ignore
   const verifyUser = (data) => {
     console.log(data);
-    console.log(data)
+    const urlEncodedData = new URLSearchParams();
+    urlEncodedData.append('initData', data);
       fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({ initData: data })
+        mode: 'no-cors',
+        body: urlEncodedData.toString()
       })
         .then(response => response.json())
         .then(data => {
