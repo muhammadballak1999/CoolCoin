@@ -56,7 +56,7 @@ export default function RootLayout({
           setUserData(window.Telegram.WebApp.initDataUnsafe?.user);
           // console.log('user', user);
 
-          verifyUser({ initData: initData });
+          verifyUser(initData);
         };
         document.head.appendChild(script);
       }
@@ -110,15 +110,12 @@ export default function RootLayout({
 
   // @ts-ignore
   const verifyUser = (data) => {
+    console.log(data);
     console.log(data)
       fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
         mode: 'no-cors',
-        body: JSON.parse(JSON.stringify(data))
+        body: JSON.stringify({ data })
       })
         .then(response => response.json())
         .then(data => {
