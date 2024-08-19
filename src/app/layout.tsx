@@ -45,22 +45,18 @@ export default function RootLayout({
           // @ts-ignore
           const initData = window.Telegram.WebApp.initData;
           const params = new URLSearchParams(initData);
-          const payload = {
-            // @ts-ignore
-            first_name: window.Telegram.WebApp.initDataUnsafe?.user.first_name,
-            // @ts-ignore
-            last_name: window.Telegram.WebApp.initDataUnsafe?.user.last_name,
-            // @ts-ignore
-            username: window.Telegram.WebApp.initDataUnsafe?.user.username,
+          const user = {
+          // @ts-ignore
+            ...window.Telegram.WebApp.initDataUnsafe?.user,
             auth_date: params.get('auth_date'),
             hash: params.get('hash'),
           };
 
           // @ts-ignore
           setUserData(window.Telegram.WebApp.initDataUnsafe?.user);
-          console.log('payload', payload);
+          // console.log('user', user);
 
-          verifyUser(payload);
+          verifyUser({ initData });
         };
         document.head.appendChild(script);
       }
@@ -120,6 +116,7 @@ export default function RootLayout({
           'Content-Type': 'application/json',
         },
         mode: 'no-cors',
+        body: data
       })
         .then(response => response.json())
         .then(data => {
