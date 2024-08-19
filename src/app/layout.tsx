@@ -44,18 +44,18 @@ export default function RootLayout({
           // You can now access the Telegram object and perform operations
           // @ts-ignore
           const initData = window.Telegram.WebApp.initData;
-          const params = new URLSearchParams(initData);
-          const user = {
-          // @ts-ignore
-            ...window.Telegram.WebApp.initDataUnsafe?.user,
-            hash: params.get('hash'),
-          };
+          // const params = new URLSearchParams(initData);
+          // const user = {
+          // // @ts-ignore
+          //   ...window.Telegram.WebApp.initDataUnsafe?.user,
+          //   hash: params.get('hash'),
+          // };
 
           // @ts-ignore
-          setUserData(user);
-          console.log('user', user);
+          // setUserData(user);
+          // console.log('user', user);
 
-          verifyUser(params.get('hash')!);
+          verifyUser(initData);
         };
         document.head.appendChild(script);
       }
@@ -107,16 +107,15 @@ export default function RootLayout({
   //   }
   // }, []);
 
-  const verifyUser = (telegramToken: string) => {
-      console.log('token', `JWT ${telegramToken}`)
+  // @ts-ignore
+  const verifyUser = (data) => {
       fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
         method: 'POST',
         headers: {
-          'Acess-Control-Allow-Origin': 'http://localhost:3000',
-          'Authorization': `JWT ${telegramToken}`,
           'Content-Type': 'application/json',
         },
         mode: 'no-cors',
+        body: data,
       })
         .then(response => response.json())
         .then(data => {
