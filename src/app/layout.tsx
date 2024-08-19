@@ -116,8 +116,8 @@ export default function RootLayout({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        mode: 'no-cors',
         body: JSON.stringify({ initData: data })
       })
         .then(response => response.json())
