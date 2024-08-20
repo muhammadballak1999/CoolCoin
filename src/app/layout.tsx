@@ -27,6 +27,7 @@ export default function RootLayout({
   const isHome = pathName === "/"
   const [isLoading, setIsLoading] = useState(isHome)
   const [userData, setUserData] = useState(null);
+  const [response, setResponse] = useState(null);
 
 
   useEffect(() => {
@@ -121,7 +122,9 @@ export default function RootLayout({
         mode: 'no-cors',
         body: urlEncodedData.toString()
       })
-        .then(response => console.log('response', response))
+        .then(async response => setResponse(await response.json()))
+
+        console.log(response)
         // .then(data => {
         //   if (data.success) {
         //     console.log('data', data)
