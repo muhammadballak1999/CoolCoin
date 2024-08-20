@@ -130,7 +130,6 @@ export default function RootLayout({
             console.error('Authentication failed');
           }
         })
-        .catch(error => console.error('Error:', error));
   }
 
   const Content = () => {

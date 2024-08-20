@@ -24,11 +24,6 @@ export const Statistics = () => {
           </span>
         </div>
         </div>
-        <div className="flex flex-col items-center rounded-md p-2 w-full relative">
-          <span className="text-[9px] font-semibold">net worth</span>
-          <Image src={EmojiSmall} alt="small emoji" className="absolute left-[40%] top-7" />
-          <span className="font-bold text-sm">0</span>
-        </div>
         <div className="flex flex-col items-center rounded-md p-3 w-full relative">
           <Image src={EmojiMedium} alt="small emoji" className="absolute left-[20%]" />
           <span className="font-bold text-3xl">0</span>
