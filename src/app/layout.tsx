@@ -27,7 +27,6 @@ export default function RootLayout({
   const isHome = pathName === "/"
   const [isLoading, setIsLoading] = useState(isHome)
   const [userData, setUserData] = useState(null);
-  const [response, setResponse] = useState(null);
 
 
   useEffect(() => {
@@ -119,20 +118,19 @@ export default function RootLayout({
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        mode: 'no-cors',
+        // mode: 'no-cors',
         body: urlEncodedData.toString()
-      }).then(response => {
-        console.log('response', response);
-        return response.text();
       })
-      .then(async (data) => {
-        console.log('data', data)
-        await Promise.resolve(data ? JSON.parse(data) : {});
-        console.log('data', JSON.parse(data))
-      })
-      .catch((error) => {
-        Promise.reject(error)
-      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('data', data)
+            console.log('User authenticated successfully');
+          } else {
+            console.error('Authentication failed');
+          }
+        })
+        .catch(err => console.log(err.message));
   }
 
   const Content = () => {
