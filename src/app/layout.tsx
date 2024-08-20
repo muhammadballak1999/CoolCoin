@@ -125,7 +125,8 @@ export default function RootLayout({
         return response.text()
       })
       .then((data) => {
-        Promise.resolve(data ? JSON.parse(data) : {})
+        console.log('resolve', Promise.resolve(data ? JSON.parse(data) : {}));
+        console.log('data', data)
       })
       .catch((error) => {
         Promise.reject(error)
