@@ -121,15 +121,15 @@ export default function RootLayout({
         mode: 'no-cors',
         body: urlEncodedData.toString()
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            console.log('data', data)
-            console.log('User authenticated successfully');
-          } else {
-            console.error('Authentication failed');
-          }
-        })
+        .then(response => console.log('response', response))
+        // .then(data => {
+        //   if (data.success) {
+        //     console.log('data', data)
+        //     console.log('User authenticated successfully');
+        //   } else {
+        //     console.error('Authentication failed');
+        //   }
+        // })
   }
 
   const Content = () => {
