@@ -122,11 +122,13 @@ export default function RootLayout({
         mode: 'no-cors',
         body: urlEncodedData.toString()
       }).then(response => {
-        return response.text()
+        console.log('response', response);
+        return response.text();
       })
-      .then((data) => {
-        console.log('resolve', Promise.resolve(data ? JSON.parse(data) : {}));
+      .then(async (data) => {
         console.log('data', data)
+        await Promise.resolve(data ? JSON.parse(data) : {});
+        console.log('data', JSON.parse(data))
       })
       .catch((error) => {
         Promise.reject(error)
