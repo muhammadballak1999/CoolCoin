@@ -14,7 +14,7 @@ export interface MainSliceState extends CommonStoreState {
   characters: IPaginatedResponse<ICharacter>,
 
   getGameStatus: () => Promise<IGameStatus | undefined>;
-  getCharacters: (params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
+  getCharacters: (renew: boolean, params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
@@ -41,10 +41,19 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
     });
   },
 
-  getCharacters: async (params?: ICharacterQuery) => {
+  getCharacters: async (renew: boolean, params?: ICharacterQuery) => {
     return actionWrapper(set, async () => {
       const res = await ApiService.getInstance().getCharacters(params);
-      set({ characters: res.data })
+      if(renew) {
+        set({ characters: res.data });
+      } else {
+        set((state) => ({
+          characters: {
+            ...state.characters,
+            results: [...state.characters.results, ...res.data.results],
+          }
+        }));
+      }
       return res.data
     });
   },

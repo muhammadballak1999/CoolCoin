@@ -14,28 +14,30 @@ export default function MyCollection() {
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
 
-  const { characters, getCharacters } = useMainStore();
+  const { characters, getCharacters, isLoading } = useMainStore();
 
   const pageUpdate = debounce(() => {
-    console.log('hello');
+    if(page * 20 >= characters?.count) {
+      return;
+    }
 
-    fetchCharacters(page + 1, name);
+    fetchCharacters(false, page + 1, name);
 
     setPage(page + 1);
-  }, 750)
+  }, 0)
 
   const nameUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);
     setName(e.target.value);
-    fetchCharacters(page, e.target.value);
+    fetchCharacters(true, page, e.target.value);
   }
 
-  const fetchCharacters = debounce((page?: number, name?: string) => {
-    getCharacters({ page: page || undefined, name: name || undefined });
+  const fetchCharacters = debounce((renew: boolean, page?: number, name?: string) => {
+    getCharacters(renew, { page: page || undefined, name: name || undefined });
   }, 750)
 
   useEffect(() => {
-    getCharacters();
+    getCharacters(true);
   }, [])
 
   return (
@@ -57,12 +59,12 @@ export default function MyCollection() {
         <InfiniteScroll
           dataLength={page * 20} //This is important field to render the next data
           next={pageUpdate}
-          hasMore={true}
+          hasMore={characters?.results?.length < characters?.count}
           loader={<h4>Loading...</h4>}
           height={'60vh'}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
+              { characters?.results?.length ? <b>Yay! You have seen it all</b> : <></> }
             </p>
           }
         >
