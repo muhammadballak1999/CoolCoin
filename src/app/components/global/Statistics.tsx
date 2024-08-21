@@ -34,7 +34,7 @@ export const Statistics = () => {
             <div className="flex gap-2 flex-nowrap items-start w-full">
             <div className="flex flex-col items-center rounded-md p-2 w-full">
               <span className="text-[9px] font-semibold">next claim</span>
-                <CountdownTimer seconds={120} completionNode={<span className="font-bold text-sm">NOW</span>} onFinish={() => {}} />
+                <CountdownTimer seconds={nextClaimTimeSecond} completionNode={<span className="font-bold text-sm">NOW</span>} onFinish={() => {}} />
             </div>
             <div className="flex flex-col items-center rounded-md p-2 w-full">
               <span className="text-[9px] font-semibold">Rolls Left</span>
