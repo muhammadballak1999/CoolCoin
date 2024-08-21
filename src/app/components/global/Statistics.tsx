@@ -18,11 +18,11 @@ export const Statistics = () => {
 
 
   useEffect(() => {
-    const getGameStatus = async () => {
+    const getGameStatistics = async () => {
       await getGameStatus();
     }
 
-    getGameStatus();
+    getGameStatistics();
   }, [])
 
     return (
