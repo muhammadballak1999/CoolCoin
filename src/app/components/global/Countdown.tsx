@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Countdown from 'react-countdown';
 
 interface IProps {
     seconds: number;
     completionText?: string;
+    completionNode?: ReactElement;
     onFinish: () => void;
   }
   
@@ -26,10 +27,13 @@ export const CountdownTimer = React.memo((props: IProps) => {
               return <Completionist />;
             } else {
               // Render a countdown
-              return <>
+              return props.completionText
+                 ? <>
                        <span className='text-[10px] text-gray-400'>{seconds}s</span>
                        <span className='text-[10px] text-gray-400'>Remaning to claim</span>
-                    </>;
+                    </>
+                    :
+                    <>{ props.completionNode }</>
             }
         }}
     />
