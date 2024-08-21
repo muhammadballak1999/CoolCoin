@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 
 import { CommonStoreState, actionWrapper } from '../../common';
 import { ApiService } from '@/services';
-import { IGameStatus } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse } from '@/types';
 
 export interface MainSliceState extends CommonStoreState {
   nextClaimTimeSecond: number;
@@ -10,7 +10,11 @@ export interface MainSliceState extends CommonStoreState {
   profitPerHour: number;
   rollsLeft: number;
   totalCoins: number;
+
+  characters: IPaginatedResponse<ICharacter | null>,
+
   getGameStatus: () => Promise<IGameStatus | undefined>;
+  getCharacters: () => Promise<IPaginatedResponse<ICharacter | null>>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
@@ -21,6 +25,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   profitPerHour: 0,
   rollsLeft: 0,
   totalCoins: 0,
+  characters: null!,
 
   getGameStatus: async () => {
     return actionWrapper(set, async () => {
@@ -32,6 +37,14 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
         profitPerHour: res.data.profit_per_hour,
         totalCoins: res.data.total_coins,
       })
+      return res.data
+    });
+  },
+
+  getCharacters: async (params?: ICharacterQuery) => {
+    return actionWrapper(set, async () => {
+      const res = await ApiService.getInstance().getCharacters(params);
+      set({ characters: res.data })
       return res.data
     });
   },

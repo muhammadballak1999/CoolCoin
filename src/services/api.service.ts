@@ -1,4 +1,4 @@
-import { IGameStatus } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse } from '@/types';
 import { AxiosService } from './axios.service';
 import {
     IVerifyUserPayload,
@@ -24,5 +24,9 @@ export class ApiService {
 
   async getGameStatus() {
     return this.axiosService.get<IGameStatus>('game/status/');
+  }
+
+  async getCharacters(params?: ICharacterQuery) {
+    return this.axiosService.get<IPaginatedResponse<ICharacter>>('character/', { params });
   }
 }

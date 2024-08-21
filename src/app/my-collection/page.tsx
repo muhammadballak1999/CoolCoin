@@ -3,12 +3,19 @@ import { Statistics } from "../components/global/Statistics";
 import Image from "next/image"
 import Goku from '../assets/goku.jpg';
 import { SellSendCard } from "../components/global/SellSendCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMainStore } from "@/stores";
 
 export default function MyCollection() {
 
   const [showCard, setShowCard] = useState(false);
   const array = [0, 1, 2, 3, 4, 5, 6, 8];
+
+  const { getCharacters } = useMainStore();
+
+  useEffect(() => {
+    getCharacters();
+  }, [])
 
   return (
     <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10">
