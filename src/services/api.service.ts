@@ -18,6 +18,6 @@ export class ApiService {
   }
 
   async verifyUser(payload: IVerifyUserPayload) {
-    return this.axiosService.post<IVerifyUserResponse>('auth/telegram/', payload);
+    return this.axiosService.post<IVerifyUserResponse>('auth/telegram/', JSON.stringify(payload));
   }
 }
