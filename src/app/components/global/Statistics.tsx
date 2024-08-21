@@ -8,15 +8,19 @@ import { useEffect } from "react";
 
 export const Statistics = () => {
 
-  const mainStore = useMainStore();
+  const {
+    getGameStatus,
+    nextRollTime,
+    rollsLeft,
+    profitPerHour,
+    totalCoins
+  } = useMainStore();
 
 
   useEffect(() => {
     const getGameStatus = async () => {
-      await mainStore.getGameStatus();
+      await getGameStatus();
     }
-
-    console.log('okay')
 
     getGameStatus();
   }, [])
@@ -26,23 +30,23 @@ export const Statistics = () => {
         <div className="flex gap-2 flex-nowrap items-start w-full">
         <div className="flex flex-col items-center rounded-md p-2 w-full">
           <span className="text-[9px] font-semibold">next claim</span>
-          <span className="font-bold text-sm">NOW</span>
+          <span className="font-bold text-sm">{ nextRollTime }</span>
         </div>
         <div className="flex flex-col items-center rounded-md p-2 w-full">
           <span className="text-[9px] font-semibold">Rolls Left</span>
-          <span className="font-bold text-sm">10</span>
+          <span className="font-bold text-sm">{ rollsLeft }</span>
         </div>
         <div className="flex flex-col items-center rounded-md p-2 w-full relative">
           <span className="text-[9px] font-semibold">Profit Per Hour</span>
             <Image src={EmojiSmall} alt="small emoji" className="absolute left-5 top-7" />
           <span className="font-bold text-sm">
-            1
+            { profitPerHour }
           </span>
         </div>
         </div>
         <div className="flex flex-col items-center rounded-md p-3 w-full relative">
           <Image src={EmojiMedium} alt="small emoji" className="absolute left-[20%]" />
-          <span className="font-bold text-3xl">0</span>
+          <span className="font-bold text-3xl">{ totalCoins }</span>
         </div>
       </div>
     )

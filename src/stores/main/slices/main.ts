@@ -5,19 +5,35 @@ import { ApiService } from '@/services';
 import { IGameStatus } from '@/types';
 
 export interface MainSliceState extends CommonStoreState {
-  count: number;
+  gameId: number;
+  nextRollTime: string;
+  playerId: number;
+  profitPerHour: number;
+  rollsLeft: number;
+  totalCoins: number;
   getGameStatus: () => Promise<IGameStatus | undefined>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
   set,
 ) => ({
-  count: 0,
+  gameId: 0,
+  nextRollTime: null!,
+  playerId: 0,
+  profitPerHour: 0,
+  rollsLeft: 0,
+  totalCoins: 0,
 
   getGameStatus: async () => {
     return actionWrapper(set, async () => {
       const res = await ApiService.getInstance().getGameStatus();
-      console.log('res game status', res)
+      set({
+        gameId: res.data.game_id,
+        nextRollTime: res.data.next_roll_time,
+        playerId: res.data.player_id,
+        rollsLeft: res.data.rolls_left,
+        totalCoins: res.data.total_coins,
+      })
       return res.data
     });
   },
