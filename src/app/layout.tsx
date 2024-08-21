@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { SplashScreen } from "./components/SplashScreen";
 import { BottomNavigationBar } from "./components/BottomNavigationBar";
+import { useAuthStore } from "@/stores";
+import { IVerifyUserPayload } from "@/types";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +29,8 @@ export default function RootLayout({
   const isHome = pathName === "/"
   const [isLoading, setIsLoading] = useState(isHome)
   const [userData, setUserData] = useState(null);
+
+  const authStore = useAuthStore();
 
 
   useEffect(() => {
@@ -109,28 +113,9 @@ export default function RootLayout({
   // }, []);
 
   // @ts-ignore
-  const verifyUser = (data) => {
-    console.log(data);
-    const urlEncodedData = new URLSearchParams();
-    urlEncodedData.append('initData', data);
-      fetch('https://coolcoin-services.onrender.com/api/auth/telegram/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        // mode: 'no-cors',
-        body: urlEncodedData.toString()
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            console.log('data', data)
-            console.log('User authenticated successfully');
-          } else {
-            console.error('Authentication failed');
-          }
-        })
-        .catch(err => console.log(err.message));
+  const verifyUser = (data: IVerifyUserPayload) => {
+    console.log('Hello', data);
+    authStore.verifyUser(data)
   }
 
   const Content = () => {
