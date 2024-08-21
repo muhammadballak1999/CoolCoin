@@ -5,12 +5,13 @@ import EmojiSmall from '../../assets/emoji-small.svg';
 import EmojiMedium from '../../assets/emoji-medium.svg';
 import { useMainStore } from "@/stores";
 import { useEffect } from "react";
+import { CountdownTimer } from "./Countdown";
 
 export const Statistics = () => {
 
   const {
     getGameStatus,
-    nextRollTime,
+    nextClaimTimeSecond,
     rollsLeft,
     profitPerHour,
     totalCoins
@@ -30,7 +31,14 @@ export const Statistics = () => {
         <div className="flex gap-2 flex-nowrap items-start w-full">
         <div className="flex flex-col items-center rounded-md p-2 w-full">
           <span className="text-[9px] font-semibold">next claim</span>
-          <span className="font-bold text-sm">{ nextRollTime }</span>
+          {
+            nextClaimTimeSecond 
+            ?
+             <CountdownTimer seconds={nextClaimTimeSecond} completionText="NOW" onFinish={() => {}} />
+            :
+            <span className="font-bold text-sm">Now</span>
+          
+          }
         </div>
         <div className="flex flex-col items-center rounded-md p-2 w-full">
           <span className="text-[9px] font-semibold">Rolls Left</span>

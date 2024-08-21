@@ -6,7 +6,7 @@ import { IGameStatus } from '@/types';
 
 export interface MainSliceState extends CommonStoreState {
   gameId: number;
-  nextRollTime: string;
+  nextClaimTimeSecond: number;
   playerId: number;
   profitPerHour: number;
   rollsLeft: number;
@@ -18,7 +18,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   set,
 ) => ({
   gameId: 0,
-  nextRollTime: null!,
+  nextClaimTimeSecond: 0,
   playerId: 0,
   profitPerHour: 0,
   rollsLeft: 0,
@@ -29,7 +29,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
       const res = await ApiService.getInstance().getGameStatus();
       set({
         gameId: res.data.game_id,
-        nextRollTime: res.data.next_roll_time,
+        nextClaimTimeSecond: res.data.next_claim_time_second,
         playerId: res.data.player_id,
         rollsLeft: res.data.rolls_left,
         totalCoins: res.data.total_coins,
