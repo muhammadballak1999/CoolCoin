@@ -68,7 +68,7 @@ import axios, {
         | (RawAxiosRequestHeaders & MethodsHeaders)
         | AxiosHeaders = {};
   
-      const accessToken = localStorage.getItem('token');
+      const accessToken = this.localStorageService.getToken();
       if (accessToken) {
         globalHeaders.Authorization = `JWT ${accessToken}`;
       }

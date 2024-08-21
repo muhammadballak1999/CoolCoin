@@ -15,12 +15,12 @@ export class LocalStorageService {
   }
 
   getToken(): string {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     return token && JSON.parse(token);
   }
 
   setToken(token: string) {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('access_token', JSON.stringify(token));
   }
 
   // getAccessToken() {

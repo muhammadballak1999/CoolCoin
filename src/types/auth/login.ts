@@ -3,7 +3,7 @@ export interface IVerifyUserPayload {
 }
   
 export interface IVerifyUserResponse {
-    token: string;
+    access_token: string;
 }
 
 export interface IUser {

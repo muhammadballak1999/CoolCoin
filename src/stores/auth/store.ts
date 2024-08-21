@@ -23,8 +23,8 @@ export const useAuthStore = create<AuthStoreState>()(
 
           console.log('res', res)
 
-          LocalStorageService.getInstance().setToken(res.data.token!);
-          set(() => ({ isLoggedIn: !!res.data.token }));
+          LocalStorageService.getInstance().setToken(res.data.access_token!);
+          set(() => ({ isLoggedIn: !!res.data.access_token }));
 
           return res.data;
         });
