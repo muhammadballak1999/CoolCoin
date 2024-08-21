@@ -16,19 +16,19 @@ export default function MyCollection() {
 
   const { characters, getCharacters } = useMainStore();
 
-  const getMoreCharacters = debounce(() => {
-    setPage(page + 1)
+  const pageUpdate = debounce(() => {
+    setPage(page + 1);
     getCharacters({ page, name });
+  }, 750)
+
+  const nameUpdate = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(0);
+    getCharacters({ name: e.target.value });
   }, 750)
 
   useEffect(() => {
     getCharacters();
   }, [])
-
-  const onNameSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e?.target?.value)
-    getMoreCharacters()
-  }
 
   return (
     <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10">
@@ -42,13 +42,13 @@ export default function MyCollection() {
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input value={name} type="search" id="search" className="block bg-transparent text-white w-full h-10 p-5 ps-10 text-sm placeholder-white border border-gray-200 rounded-lg dark:placeholder-gray-400 dark:text-white" placeholder="Search" required onChange={onNameSearch} />
+            <input value={name} type="search" id="search" className="block bg-transparent text-white w-full h-10 p-5 ps-10 text-sm placeholder-white border border-gray-200 rounded-lg dark:placeholder-gray-400 dark:text-white" placeholder="Search" required onChange={nameUpdate} />
         </div>
         <div className="scrollable-div w-full mt-5 p-2 h-full">
 
         <InfiniteScroll
           dataLength={10} //This is important field to render the next data
-          next={getMoreCharacters}
+          next={pageUpdate}
           hasMore={true}
           loader={<h4>Loading...</h4>}
           height={'60vh'}
@@ -56,16 +56,6 @@ export default function MyCollection() {
             <p style={{ textAlign: 'center' }}>
               <b>Yay! You have seen it all</b>
             </p>
-          }
-          // below props only if you need pull down functionality
-          refreshFunction={getMoreCharacters}
-          pullDownToRefresh
-          pullDownToRefreshThreshold={50}
-          pullDownToRefreshContent={
-            <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-          }
-          releaseToRefreshContent={
-            <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
           }
         >
           {
