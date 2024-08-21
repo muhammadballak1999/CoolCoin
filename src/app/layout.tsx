@@ -69,49 +69,6 @@ export default function RootLayout({
     loadTelegramSdk();
   }, []);
 
-  // useEffect(() => {
-  //     // @ts-ignore
-  //   if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-  //     // Indicate that the app is ready
-  //     // @ts-ignore
-  //     window.Telegram.WebApp.ready();
-
-  //     // Extract initData (contains the authentication data)
-  //     // @ts-ignore
-  //     const initData = window.Telegram.WebApp.initData;
-
-  //     // You can also parse initData into an object if needed
-  //     const params = new URLSearchParams(initData);
-  //     const user = {
-  //       id: params.get('user_id'),
-  //       auth_date: params.get('auth_date'),
-  //       hash: params.get('hash'),
-  //     };
-
-  //     // @ts-ignore
-  //     setUserData(user);
-  //     alert(user);
-
-  //     // Send this data to the backend
-  //     // fetch('/api/auth', {
-  //     //   method: 'POST',
-  //     //   headers: {
-  //     //     'Content-Type': 'application/json',
-  //     //   },
-  //     //   body: JSON.stringify({ initData }),
-  //     // })
-  //     //   .then(response => response.json())
-  //     //   .then(data => {
-  //     //     if (data.success) {
-  //     //       console.log('User authenticated successfully');
-  //     //     } else {
-  //     //       console.error('Authentication failed');
-  //     //     }
-  //     //   })
-  //     //   .catch(error => console.error('Error:', error));
-  //   }
-  // }, []);
-
   // @ts-ignore
   const verifyUser = (data) => {
     console.log('Hello', data);

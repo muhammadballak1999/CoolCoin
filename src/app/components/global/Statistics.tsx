@@ -19,7 +19,7 @@ export const Statistics = () => {
     console.log('okay')
 
     getGameStatus();
-  }, [mainStore])
+  }, [])
 
     return (
       <div className="flex flex-col gap-2 w-full">
