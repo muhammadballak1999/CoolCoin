@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 
 import {
-  ExampleSliceState,
+  MainSliceState,
 } from './slices';
 
 import {
-  createExampleSlice,
+  createMainSlice,
 } from './slices';
 
-export const useExampleStore = create<ExampleSliceState>((...a) => ({
-  ...createExampleSlice(...a),
+export const useMainStore = create<MainSliceState>((...a) => ({
+  ...createMainSlice(...a),
 }));
 

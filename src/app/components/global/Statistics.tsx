@@ -3,8 +3,24 @@
 import Image from "next/image";
 import EmojiSmall from '../../assets/emoji-small.svg';
 import EmojiMedium from '../../assets/emoji-medium.svg';
+import { useMainStore } from "@/stores";
+import { useEffect } from "react";
 
 export const Statistics = () => {
+
+  const mainStore = useMainStore();
+
+
+  useEffect(() => {
+    const getGameStatus = async () => {
+      await mainStore.getGameStatus();
+    }
+
+    console.log('okay')
+
+    getGameStatus();
+  }, [mainStore])
+
     return (
       <div className="flex flex-col gap-2 w-full">
         <div className="flex gap-2 flex-nowrap items-start w-full">

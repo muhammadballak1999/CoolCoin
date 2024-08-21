@@ -1,3 +1,4 @@
+import { IGameStatus } from '@/types';
 import { AxiosService } from './axios.service';
 import {
     IVerifyUserPayload,
@@ -19,5 +20,9 @@ export class ApiService {
 
   async verifyUser(payload: IVerifyUserPayload) {
     return this.axiosService.post<IVerifyUserResponse>('auth/telegram/', JSON.stringify(payload));
+  }
+
+  async getGameStatus() {
+    return this.axiosService.get<IGameStatus>('game/status/');
   }
 }
