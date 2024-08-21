@@ -48,7 +48,6 @@ import axios, {
           headers: {
             common: {
               'Content-Type': 'application/json',
-              'Authorization': localStorageService.getToken(),
             },
           },
           timeout: 30000,
