@@ -113,9 +113,9 @@ export default function RootLayout({
   // }, []);
 
   // @ts-ignore
-  const verifyUser = (data: IVerifyUserPayload) => {
+  const verifyUser = (data) => {
     console.log('Hello', data);
-    authStore.verifyUser(data)
+    authStore.verifyUser({ initData: data })
   }
 
   const Content = () => {
