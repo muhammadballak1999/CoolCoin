@@ -27,6 +27,7 @@ export default function MyCollection() {
 
   const onNameSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e?.target?.value)
+    getMoreCharacters()
   }
 
   return (
@@ -72,7 +73,8 @@ export default function MyCollection() {
               return (
                 <div key={index} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md" onClick={() => setShowCard(true)}>
                   <div className="flex items-center gap-2">
-                    <Image src={character.image_url} alt="goku" className="rounded-md h-[60px] w-[70px]" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={character.image_url} alt="goku" className="rounded-md h-[60px] w-[70px]" />
                     <div className="flex flex-col justify-between items-start h-[60px]">
                       <span className="text-xs font-bold">{ character.title }</span>
                       <span className="text-xs">{ character.name }</span>
