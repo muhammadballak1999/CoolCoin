@@ -44,7 +44,7 @@ import axios, {
         const localStorageService = LocalStorageService.getInstance();
   
         const axiosConfig: CreateAxiosDefaults = {
-          baseURL: process.env.API_ENDPOINT,
+          baseURL: 'https://coolcoin-services.onrender.com/api/',
           headers: {
             common: {
               'Content-Type': 'application/json',
