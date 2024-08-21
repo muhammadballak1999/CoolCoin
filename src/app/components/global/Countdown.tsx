@@ -19,7 +19,8 @@ export const CountdownTimer = React.memo((props: IProps) => {
     return (
     <Countdown
         date={Date.now() + (props.seconds * 1000)}
-        renderer={({ seconds, completed }) => {
+        zeroPadTime={2}
+        renderer={({ formatted: { hours, minutes,seconds }, completed}) => {
             
             if (completed) {
               props.onFinish();
@@ -33,7 +34,7 @@ export const CountdownTimer = React.memo((props: IProps) => {
                        <span className='text-[10px] text-gray-400'>Remaning to claim</span>
                     </>
                     :
-                    <span className="font-bold text-sm">{seconds}s</span>
+                    <span className="font-bold text-sm">{hours}:{minutes}:{seconds}</span>
             }
         }}
     />
