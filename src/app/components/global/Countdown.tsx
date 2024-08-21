@@ -14,7 +14,7 @@ interface IProps {
 // eslint-disable-next-line react/display-name
 export const CountdownTimer = React.memo((props: IProps) => {
 
-    const Completionist = () => <span className='text-[10px] text-gray-400'>{props.completionText || 'Lost your chance'}</span>;
+    const Completionist = () => props.completionText ? <span className='text-[10px] text-gray-400'>{props.completionText}</span> : props.completionNode;
 
     return (
     <Countdown
@@ -33,7 +33,7 @@ export const CountdownTimer = React.memo((props: IProps) => {
                        <span className='text-[10px] text-gray-400'>Remaning to claim</span>
                     </>
                     :
-                    <>{ props.completionNode }</>
+                    <span className="font-bold text-sm">{seconds}s</span>
             }
         }}
     />
