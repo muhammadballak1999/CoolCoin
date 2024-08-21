@@ -9,6 +9,7 @@ import { SplashScreen } from "./components/SplashScreen";
 import { BottomNavigationBar } from "./components/BottomNavigationBar";
 import { useAuthStore } from "@/stores";
 import { IVerifyUserPayload } from "@/types";
+import { LocalStorageService } from "@/services";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,7 +60,6 @@ export default function RootLayout({
           // @ts-ignore
           setUserData(window.Telegram.WebApp.initDataUnsafe?.user);
           // console.log('user', user);
-
           verifyUser(initData);
         };
         document.head.appendChild(script);
@@ -71,7 +71,10 @@ export default function RootLayout({
 
   // @ts-ignore
   const verifyUser = (data) => {
-    console.log('Hello', data);
+    if(process.env.NODE_ENV === 'development') {
+      LocalStorageService.getInstance().setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0ODY2MTY5LCJqdGkiOiJiYjk3YmQzYjU5NDE0ZWVhYjNmNWM4N2U4N2FkMDc0YiIsInVzZXJfaWQiOjF9.-bAncT5TTe8gz0a5lm-XWXYgY0fzY1KLNm-kczKiC48');
+      return
+    }
     authStore.verifyUser({ initData: data })
   }
 

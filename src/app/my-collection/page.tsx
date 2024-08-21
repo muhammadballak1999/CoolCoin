@@ -17,13 +17,21 @@ export default function MyCollection() {
   const { characters, getCharacters } = useMainStore();
 
   const pageUpdate = debounce(() => {
+    console.log('hello');
+
+    fetchCharacters(page + 1, name);
+
     setPage(page + 1);
-    getCharacters({ page, name });
   }, 750)
 
-  const nameUpdate = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+  const nameUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);
-    getCharacters({ name: e.target.value });
+    setName(e.target.value);
+    fetchCharacters(page, e.target.value);
+  }
+
+  const fetchCharacters = debounce((page?: number, name?: string) => {
+    getCharacters({ page: page || undefined, name: name || undefined });
   }, 750)
 
   useEffect(() => {
@@ -47,7 +55,7 @@ export default function MyCollection() {
         <div className="scrollable-div w-full mt-5 p-2 h-full">
 
         <InfiniteScroll
-          dataLength={10} //This is important field to render the next data
+          dataLength={page * 20} //This is important field to render the next data
           next={pageUpdate}
           hasMore={true}
           loader={<h4>Loading...</h4>}
