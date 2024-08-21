@@ -11,10 +11,10 @@ export interface MainSliceState extends CommonStoreState {
   rollsLeft: number;
   totalCoins: number;
 
-  characters: IPaginatedResponse<ICharacter | null>,
+  characters: IPaginatedResponse<ICharacter>,
 
   getGameStatus: () => Promise<IGameStatus | undefined>;
-  getCharacters: () => Promise<IPaginatedResponse<ICharacter | null>>;
+  getCharacters: (params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (

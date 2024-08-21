@@ -14,6 +14,7 @@ export interface ICharacter {
     id: number;
     name: string;
     title: string;
+    profit_per_hour: number;
     image_url: string;
     rank: number;
     is_claimed: false;
