@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { ClaimModal } from "./components/modals/ClaimModal";
 import { ClaimCard } from "./components/global/ClaimCard";
 import lottie from 'lottie-web';
+import { useMainStore } from "@/stores";
+import { ICharacter } from "@/types";
 
 export default function Home() {
 
@@ -14,10 +16,13 @@ export default function Home() {
   const claimAnimationContainer = useRef(null);
   const [isRolled, setIsRolled] = useState(false);
   const [isRolling, setIsRolling] = useState(false);
+  const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
+
+  const { roll, claim, getGameStatus } = useMainStore();
 
 
-  const roll = () => {
-    setIsRolling(true)
+  const gameRoll = async () => {
+    setIsRolling(true);
     const animation = lottie.loadAnimation({
       container: rollAnimationContainer.current!,
       renderer: 'svg',
@@ -31,9 +36,14 @@ export default function Home() {
       setIsRolling(false);
       setIsRolled(true);
     });
+
+    const res = await roll();
+    setCharacterToClaim(res);
+    getGameStatus();
   }
 
-  const claim = () => {
+  const claimCharacter = async () => {
+    await claim(characterToClaim?.id);
     // @ts-ignore
     modalRef.current?.click();
   }
@@ -44,10 +54,10 @@ export default function Home() {
       <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] overflow-auto relative z-10">
         <div ref={rollAnimationContainer}></div>
         { isRolled && !isRolling ? (
-          <ClaimCard rollAgain={roll} claim={claim} />
+          <ClaimCard rollAgain={gameRoll} claim={claimCharacter} character={characterToClaim} />
         ) : ( isRolling ? <></> :
           <div className="flex items-center justify-center w-full rounded-md mt-2" style={{ height: windowsSize.height ? windowsSize.height/2.25 : 0 }}>
-            <div className="bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black" onClick={roll}>
+            <div className="bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black" onClick={gameRoll}>
               Roll
             </div>
           </div>

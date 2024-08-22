@@ -29,4 +29,12 @@ export class ApiService {
   async getCharacters(params?: ICharacterQuery) {
     return this.axiosService.get<IPaginatedResponse<ICharacter>>('character/', { params });
   }
+
+  async roll() {
+    return this.axiosService.post<ICharacter>('game/roll/');
+  }
+
+  async claim(characterId: number) {
+    return this.axiosService.post<ICharacter>(`character/${characterId}/claim/`);
+  }
 }
