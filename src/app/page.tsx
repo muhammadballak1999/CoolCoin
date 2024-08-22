@@ -23,7 +23,6 @@ export default function Home() {
 
 
   const gameRoll = async () => {
-    console.log(nextClaimTimeSecond)
     if(nextClaimTimeSecond !== 0) {
       return
     }
@@ -56,15 +55,23 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] overflow-auto relative z-10">
+      <main className="flex flex-col items-center px-5 pt-[125px] overflow-auto relative z-10">
         <div ref={rollAnimationContainer}></div>
         { isRolled && !isRolling ? (
           <ClaimCard rollAgain={gameRoll} claim={claimCharacter} character={characterToClaim} />
         ) : ( isRolling ? <></> :
           <div className="flex items-center justify-center w-full rounded-md mt-2" style={{ height: windowsSize.height ? windowsSize.height/2.25 : 0 }}>
-            <div className={`bg-[#${nextClaimTimeSecond ? 'ffff' : 'FFFB1F'}] flex items-center justify-center rounded-full h-40 w-40 text-black`} onClick={gameRoll}>
-              { nextClaimTimeSecond ? <CountdownTimer seconds={nextClaimTimeSecond} onFinish={() => {}} /> : 'Roll' }
-            </div>
+            {
+              nextClaimTimeSecond 
+              ? 
+                <div className={'bg-[#fff] flex items-center justify-center rounded-full h-40 w-40 text-black'} onClick={gameRoll}>
+                  <CountdownTimer seconds={nextClaimTimeSecond} completionNode={<span>Roll</span>} onFinish={() => {}} />
+                </div>
+              :
+                <div className={'bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black'} onClick={gameRoll}>
+                  Roll
+                </div>
+            }
           </div>
         )
         }
