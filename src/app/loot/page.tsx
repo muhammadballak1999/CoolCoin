@@ -1,5 +1,4 @@
 "use client";
-import { Statistics } from "../components/global/Statistics";
 import { useState } from "react";
 import { SellSendCard } from "../components/global/SellSendCard";
 import { LootListItem } from "../components/loot/LootListItem";
@@ -10,8 +9,7 @@ export default function Loot() {
   const array = [0, 1, 2, 3, 4, 5, 6, 8];
 
   return (
-    <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10 h-fill">
-      <Statistics />
+    <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] relative z-10 h-fill">
       { !showCard ?
       <>
       <div className="w-full mt-3 p-2 overflow-auto rounded-md h-fill">

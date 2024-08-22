@@ -28,11 +28,11 @@ export const Statistics = () => {
   }, [])
 
     return (
-          <div className="flex flex-col gap-2 w-full">
+          <div className="absolute z-10 flex flex-col pt-2 gap-2 w-full">
             <div className="flex gap-2 flex-nowrap items-start w-full">
             <div className="flex flex-col items-center rounded-md p-2 w-full">
               <span className="text-[9px] font-semibold">next claim</span>
-                { isLoading ? <></> : <CountdownTimer seconds={nextClaimTimeSecond} completionNode={<span className="font-bold text-sm">NOW</span>} onFinish={() => {}} /> }
+                { isLoading ? <span className="font-bold text-sm">NOW</span> : <CountdownTimer seconds={nextClaimTimeSecond} completionNode={<span className="font-bold text-sm">NOW</span>} onFinish={() => {}} /> }
             </div>
             <div className="flex flex-col items-center rounded-md p-2 w-full">
               <span className="text-[9px] font-semibold">Rolls Left</span>

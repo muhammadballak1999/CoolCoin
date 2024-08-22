@@ -1,5 +1,4 @@
 "use client";
-import { Statistics } from "../components/global/Statistics";
 import Image from "next/image"
 import { SellSendCard } from "../components/global/SellSendCard";
 import { useEffect, useState } from "react";
@@ -41,8 +40,7 @@ export default function MyCollection() {
   }, [])
 
   return (
-    <main className="flex flex-col items-center px-5 pt-5 pb-[25px] relative z-10">
-      <Statistics />
+    <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] relative z-10">
       { !showCard ?
       <>
         <label htmlFor="search" className="mb-2 text-sm font-medium">Search Ranks & Characters</label>
@@ -61,7 +59,7 @@ export default function MyCollection() {
           next={pageUpdate}
           hasMore={characters?.results?.length < characters?.count}
           loader={<h4>Loading...</h4>}
-          height={'60vh'}
+          height={'50vh'}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               { characters?.results?.length ? <b>Yay! You have seen it all</b> : <></> }

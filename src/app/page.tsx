@@ -1,8 +1,7 @@
 "use client";
 
-import { Statistics } from "./components/global/Statistics";
 import { useWindowSize } from "./hooks/useWindowsSize";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ClaimModal } from "./components/modals/ClaimModal";
 import { ClaimCard } from "./components/global/ClaimCard";
 import lottie from 'lottie-web';
@@ -42,8 +41,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col items-center px-5 pt-5 pb-[25px] overflow-auto relative z-10">
-        <Statistics />
+      <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] overflow-auto relative z-10">
         <div ref={rollAnimationContainer}></div>
         { isRolled && !isRolling ? (
           <ClaimCard rollAgain={roll} claim={claim} />

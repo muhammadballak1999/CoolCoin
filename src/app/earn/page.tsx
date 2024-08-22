@@ -1,12 +1,9 @@
 "use client";
 
-import { Statistics } from "../components/global/Statistics";
-
 export default function Earn() {
 
   return (
-    <main className="flex flex-col items-center px-5 pt-5 pb-[25px] overflow-auto relative z-10">
-      <Statistics />
+    <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] overflow-auto relative z-10">
       <div className="flex flex-col gap-3 w-full mt-3 p-5">
         <span className="text-xs font-extralight pl-2">EACH TASK GETS YOU 1,000 COOL COINS</span>
         <div className="h-10 rounded md flex items-center px-2 text-sm"> 

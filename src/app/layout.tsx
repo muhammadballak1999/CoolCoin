@@ -10,6 +10,7 @@ import { BottomNavigationBar } from "./components/BottomNavigationBar";
 import { useAuthStore } from "@/stores";
 import { IVerifyUserPayload } from "@/types";
 import { LocalStorageService } from "@/services";
+import { Statistics } from "./components/global/Statistics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -85,6 +86,7 @@ export default function RootLayout({
       ) : (
         <>
           <div className="h-[92%] overflow-auto">
+            <Statistics />
             {children}
             <div className="stars"></div>
             <div className="twinkling"></div>
