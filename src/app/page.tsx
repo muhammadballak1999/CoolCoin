@@ -7,6 +7,7 @@ import { ClaimCard } from "./components/global/ClaimCard";
 import lottie from 'lottie-web';
 import { useMainStore } from "@/stores";
 import { ICharacter } from "@/types";
+import { CountdownTimer } from "./components/global/Countdown";
 
 export default function Home() {
 
@@ -18,10 +19,14 @@ export default function Home() {
   const [isRolling, setIsRolling] = useState(false);
   const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
 
-  const { roll, claim, getGameStatus } = useMainStore();
+  const { roll, claim, getGameStatus, nextClaimTimeSecond } = useMainStore();
 
 
   const gameRoll = async () => {
+    console.log(nextClaimTimeSecond)
+    if(nextClaimTimeSecond !== 0) {
+      return
+    }
     setIsRolling(true);
     const animation = lottie.loadAnimation({
       container: rollAnimationContainer.current!,
@@ -57,8 +62,8 @@ export default function Home() {
           <ClaimCard rollAgain={gameRoll} claim={claimCharacter} character={characterToClaim} />
         ) : ( isRolling ? <></> :
           <div className="flex items-center justify-center w-full rounded-md mt-2" style={{ height: windowsSize.height ? windowsSize.height/2.25 : 0 }}>
-            <div className="bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black" onClick={gameRoll}>
-              Roll
+            <div className={`bg-[#${nextClaimTimeSecond ? 'ffff' : 'FFFB1F'}] flex items-center justify-center rounded-full h-40 w-40 text-black`} onClick={gameRoll}>
+              { nextClaimTimeSecond ? <CountdownTimer seconds={nextClaimTimeSecond} onFinish={() => {}} /> : 'Roll' }
             </div>
           </div>
         )
