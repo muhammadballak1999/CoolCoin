@@ -17,6 +17,8 @@ export interface MainSliceState extends CommonStoreState {
   getCharacters: (renew: boolean, params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
   roll: () => Promise<ICharacter>;
   claim: (characterId: number) => Promise<ICharacter>;
+  sell: (playerId: number, itemId: number) => Promise<ICharacter>;
+  send: (playerId: number, itemId: number) => Promise<ICharacter>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
@@ -71,6 +73,22 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   claim: async (characterId: number) => {
     return actionWrapper(set, async () => {
       const res = await ApiService.getInstance().claim(characterId);
+
+      return res.data
+    });
+  },
+
+  sell: async (playerId: number, itemId: number) => {
+    return actionWrapper(set, async () => {
+      const res = await ApiService.getInstance().sell(playerId, itemId);
+
+      return res.data
+    });
+  },
+
+  send: async (playerId: number, itemId: number) => {
+    return actionWrapper(set, async () => {
+      const res = await ApiService.getInstance().send(playerId, itemId);
 
       return res.data
     });

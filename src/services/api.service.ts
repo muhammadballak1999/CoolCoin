@@ -37,4 +37,12 @@ export class ApiService {
   async claim(characterId: number) {
     return this.axiosService.post<ICharacter>(`character/${characterId}/claim/`);
   }
+
+  async sell(playerId: number, itemId: number) {
+    return this.axiosService.post<ICharacter>(`player/${playerId}/collection/${itemId}/sell/`);
+  }
+
+  async send(playerId: number, itemId: number) {
+    return this.axiosService.post<ICharacter>(`player/${playerId}/collection/${itemId}/send/`);
+  }
 }

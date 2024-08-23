@@ -3,8 +3,10 @@ import Image from 'next/image'
 import CharacterToClaim from '../../assets/character-to-claim.png'
 import { Button } from "flowbite-react";
 import CharacterNameBackground from '../../assets/character-name-background.png';
+import { ICharacter } from '@/types';
 
 interface IProps {
+  character: ICharacter;
   sell: () => void;
   send: () => void;
 }
@@ -18,22 +20,22 @@ export const SellSendCard = (props: IProps) => {
                 <div className='bg-[#F0F2E1] h-10 flex items-center justify-between rounded-md w-full'>
                     <div className='flex flex-col items-center p-1'>
                     <span className='text-[11px] font-bold px-4 text-black'>PPH</span>
-                    <span className='text-[11px] font-bold px-1 text-black'>4,700</span>
+                    <span className='text-[11px] font-bold px-1 text-black'>{ props.character.profit_per_hour }</span>
                     </div>
-                    <span className='text-[11px] font-bold px-1 text-black'>Satoru Gojo</span>
-                    <span className='text-[11px] font-bold px-4 text-black'>8</span>
+                    <span className='text-[11px] font-bold px-1 text-black'>{ props.character.title }</span>
+                    <span className='text-[11px] font-bold px-4 text-black'>{ props.character.rank }</span>
                 </div>
             </div>
             <div className='w-full px-2 pt-2'>
                 <div className='flex items-center justify-center h-fit w-fit bg-[#F0F2E1] p-3 rounded-sm'>
-                    <Image src={CharacterToClaim} alt='character to claim' height={200} width={200} />
+                    <img src={props.character.image_url} alt='character to claim' className='h-[200px] w-[200px] max-h-[200px] max-w-[200px]' />
                 </div>
             </div>
             <div className='relative w-full h-fit'>
                 <Image src={CharacterNameBackground} width={100} height={10} className='w-full h-full' alt='Character name background' />
                 <div className='absolute top-[14px] w-full px-5'>
                     <div className='bg-[#F0F2E1] h-10 flex items-center justify-center rounded-sm text-[12px] font-bold w-full text-black'>
-                        Jujutsu Kaisen
+                        { props.character.name }
                     </div>
                 </div>
             </div>

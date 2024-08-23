@@ -4,8 +4,12 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import lottie from 'lottie-web';
 
+interface IProps {
+  onClose: () => void;
+}
+
 // eslint-disable-next-line react/display-name
-export const ClaimModal = React.forwardRef((props, modalRef) => {
+export const ClaimModal = React.forwardRef((props: IProps, modalRef) => {
   const [openModal, setOpenModal] = useState(false);
   const claimAnimationContainer = useRef(null);
 
@@ -16,6 +20,7 @@ export const ClaimModal = React.forwardRef((props, modalRef) => {
 
   const close = () => {
     setOpenModal(false);
+    props.onClose()
   }
 
   const claim = () => {

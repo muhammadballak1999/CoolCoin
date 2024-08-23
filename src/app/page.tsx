@@ -52,6 +52,10 @@ export default function Home() {
     modalRef.current?.click();
   }
 
+  const onConfirmClaimModalClose = () => {
+    getGameStatus()
+  }
+
 
   return (
     <>
@@ -79,7 +83,7 @@ export default function Home() {
           <button type="button" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Boost to claim more</button>
         </div>
       </main>
-      <ClaimModal ref={modalRef} />
+      <ClaimModal ref={modalRef} onClose={onConfirmClaimModalClose} />
     </>
   );
 }

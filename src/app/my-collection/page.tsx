@@ -12,8 +12,9 @@ export default function MyCollection() {
   const [showCard, setShowCard] = useState(false);
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
+  const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(null!);
 
-  const { characters, getCharacters, isLoading } = useMainStore();
+  const { playerId, characters, getCharacters, isLoading, sell, send } = useMainStore();
 
   const pageUpdate = debounce(() => {
     if(page * 20 >= characters?.count) {
@@ -37,20 +38,33 @@ export default function MyCollection() {
 
   useEffect(() => {
     getCharacters(true);
-  }, [])
+  }, []);
+
+
+  const onCharacterClick = (character: ICharacter) => {
+    setSelectedCharacter(character);
+    setShowCard(true);
+  }
+
+  const sellCharacter = (id: number) => {
+    sell(playerId, id);
+  }
+
+  const sendCharacter = (id: number) => {
+    send(playerId, id);
+  }
 
   return (
-    <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] relative z-10">
+    <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] mt-5 relative z-10">
       { !showCard ?
       <>
-        <label htmlFor="search" className="mb-2 text-sm font-medium">Search Ranks & Characters</label>
         <div className="relative w-full">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg className="w-4 h-4 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input value={name} type="search" id="search" className="block bg-transparent text-white w-full h-10 p-5 ps-10 text-sm placeholder-white border border-gray-200 rounded-lg dark:placeholder-gray-400 dark:text-white" placeholder="Search" required onChange={nameUpdate} />
+            <input value={name} type="search" id="search" className="block bg-transparent text-white w-full h-10 p-5 ps-10 text-sm placeholder-white border border-gray-200 rounded-lg dark:placeholder-gray-400 dark:text-white" placeholder="Search Ranks & Characters" required onChange={nameUpdate} />
         </div>
         <div className="scrollable-div w-full mt-5 p-2 h-full">
 
@@ -69,7 +83,7 @@ export default function MyCollection() {
           {
             characters?.results?.map((character: ICharacter, index: number) => {
               return (
-                <div key={index} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md" onClick={() => setShowCard(true)}>
+                <div key={index} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md" onClick={() => onCharacterClick(character)}>
                   <div className="flex items-center gap-2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={character.image_url} alt="goku" className="rounded-md h-[60px] w-[70px]" />
@@ -85,7 +99,7 @@ export default function MyCollection() {
             })
           }
         </InfiniteScroll>
-        </div> </> : <SellSendCard sell={() => {}} send={() => {}} />
+        </div> </> : <SellSendCard sell={() => sellCharacter(selectedCharacter.id)} send={() => sendCharacter(selectedCharacter.id)} character={selectedCharacter} />
       }
       
     </main>
