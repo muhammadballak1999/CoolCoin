@@ -7,14 +7,16 @@ import { ICharacter } from '@/types';
 
 interface IProps {
   character: ICharacter;
+  back: () => void;
   sell: () => void;
   send: () => void;
 }
 
 export const SellSendCard = (props: IProps) => {
     return (
-      <div className="flex w-fit rounded-md mt-4">
-        <div className="flex flex-col w-full items-center justify-between rounded-md">
+      <div className="flex w-fit rounded-md">
+        <div className="flex flex-col w-full items-start justify-between rounded-md">
+        <button type="button" className="mb-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={props.back}>Back</button>
           <div className='h-fit w-fit flex flex-col items-center justify-between bg-black'>
             <div className='px-2 pt-3 w-full'>
                 <div className='bg-[#F0F2E1] h-10 flex items-center justify-between rounded-md w-full'>
@@ -27,7 +29,7 @@ export const SellSendCard = (props: IProps) => {
                 </div>
             </div>
             <div className='w-full px-2 pt-2'>
-                <div className='flex items-center justify-center h-fit w-fit bg-[#F0F2E1] p-3 rounded-sm'>
+                <div className='flex items-center justify-center h-fit w-full bg-[#F0F2E1] p-3 rounded-sm'>
                     <img src={props.character.image_url} alt='character to claim' className='h-[200px] w-[200px] max-h-[200px] max-w-[200px]' />
                 </div>
             </div>

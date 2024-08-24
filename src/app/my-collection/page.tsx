@@ -1,18 +1,21 @@
 "use client";
 import Image from "next/image"
 import { SellSendCard } from "../components/global/SellSendCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMainStore } from "@/stores";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ICharacter } from "@/types";
 import { debounce } from 'lodash';
+import { SellSendConfirmModal } from "../components/modals/SellSendConfirmModal";
 
 export default function MyCollection() {
 
   const [showCard, setShowCard] = useState(false);
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
+  const [action, setAction] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(null!);
+  const modalRef = useRef(null);
 
   const { playerId, characters, getCharacters, isLoading, sell, send } = useMainStore();
 
@@ -44,6 +47,12 @@ export default function MyCollection() {
   const onCharacterClick = (character: ICharacter) => {
     setSelectedCharacter(character);
     setShowCard(true);
+  }
+
+  const onAction = (act: string) => {
+    setAction(act);
+    // @ts-ignore
+    modalRef?.current?.click();
   }
 
   const sellCharacter = (id: number) => {
@@ -99,9 +108,9 @@ export default function MyCollection() {
             })
           }
         </InfiniteScroll>
-        </div> </> : <SellSendCard sell={() => sellCharacter(selectedCharacter.id)} send={() => sendCharacter(selectedCharacter.id)} character={selectedCharacter} />
+        </div> </> : <SellSendCard sell={() => onAction('sell')} send={() => onAction('send')} character={selectedCharacter} back={() => setShowCard(false)} />
       }
-      
+      <SellSendConfirmModal ref={modalRef} onConfirm={() => action === 'sell' ? sellCharacter(selectedCharacter.id) : sendCharacter(selectedCharacter.id)} action={action} />
     </main>
   );
 }
