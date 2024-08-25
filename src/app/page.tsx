@@ -19,11 +19,11 @@ export default function Home() {
   const [isRolling, setIsRolling] = useState(false);
   const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
 
-  const { roll, claim, getGameStatus, nextClaimTimeSecond } = useMainStore();
+  const { roll, claim, getGameStatus, nextClaimTimeSecond, rollsLeft } = useMainStore();
 
 
   const gameRoll = async () => {
-    if(nextClaimTimeSecond !== 0) {
+    if(nextClaimTimeSecond !== 0 || rollsLeft === 0) {
       return
     }
     setIsRolling(true);
@@ -71,9 +71,13 @@ export default function Home() {
                 <div className={'bg-[#fff] flex items-center justify-center rounded-full h-40 w-40 text-black'} onClick={gameRoll}>
                   <CountdownTimer seconds={nextClaimTimeSecond} completionNode={<span>Roll</span>} onFinish={() => {}} />
                 </div>
-              :
+              : rollsLeft ?
                 <div className={'bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black'} onClick={gameRoll}>
                   Roll
+                </div>
+                : 
+                <div className={'bg-[#fff] flex items-center justify-center rounded-full h-40 w-40 text-black text-sm'}>
+                 { 'No Rolls Left :(' } 
                 </div>
             }
           </div>
