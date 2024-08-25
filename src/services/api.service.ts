@@ -45,4 +45,12 @@ export class ApiService {
   async send(playerId: number, itemId: number) {
     return this.axiosService.post<ICharacter>(`player/${playerId}/collection/${itemId}/send/`);
   }
+
+  async getEarnActivities() {
+    return this.axiosService.get<ICharacter>('earn/');
+  }
+
+  async earn(activityId: number) {
+    return this.axiosService.post<ICharacter>(`earn/activity/${activityId}/complete/`);
+  }
 }

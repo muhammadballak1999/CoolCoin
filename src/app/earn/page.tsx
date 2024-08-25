@@ -1,6 +1,15 @@
 "use client";
 
+import { useMainStore } from "@/stores";
+import { useEffect } from "react";
+
 export default function Earn() {
+
+  const { getEarnActivities } = useMainStore();
+
+  useEffect(() => {
+    getEarnActivities();
+  }, []);
 
   return (
     <main className="flex flex-col items-center px-5 pt-[125px] pb-[25px] overflow-auto relative z-10">
