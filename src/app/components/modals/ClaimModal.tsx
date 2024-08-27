@@ -5,7 +5,7 @@ import { useState } from "react";
 import lottie from 'lottie-web';
 
 interface IProps {
-  onClose: () => void;
+  onConfirm: () => void;
 }
 
 // eslint-disable-next-line react/display-name
@@ -20,10 +20,10 @@ export const ClaimModal = React.forwardRef((props: IProps, modalRef) => {
 
   const close = () => {
     setOpenModal(false);
-    props.onClose()
   }
 
   const claim = () => {
+    props.onConfirm();
     const animation = lottie.loadAnimation({
       container: claimAnimationContainer.current!,
       renderer: 'svg',
