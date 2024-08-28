@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { ICharacter } from "@/types";
 import { debounce } from 'lodash';
 import { SellSendConfirmModal } from "../components/modals/SellSendConfirmModal";
+import { ConfirmModal } from "../components/modals/ConfirmModal";
 
 export default function MyCollection() {
 
@@ -14,10 +15,12 @@ export default function MyCollection() {
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [action, setAction] = useState('');
+  const [tradeLink, setTradeLink] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(null!);
   const modalRef = useRef(null);
+  const sellSendConfirmModalRef = useRef(null);
 
-  const { playerId, characters, getCharacters, isLoading, sell, send } = useMainStore();
+  const { characters, getCharacters, isLoading, sell, send, getGameStatus } = useMainStore();
 
   const pageUpdate = debounce(() => {
     if(page * 20 >= characters?.count) {
@@ -55,12 +58,24 @@ export default function MyCollection() {
     modalRef?.current?.click();
   }
 
-  const sellCharacter = (id: number) => {
-    sell(playerId, id);
+  const sellCharacter = async (id: number) => {
+    await sell(id);
+    getGameStatus();
+    // @ts-ignore
+    sellSendConfirmModalRef.current?.click();
+    // @ts-ignore
+    modalRef.current?.click();
   }
 
-  const sendCharacter = (id: number) => {
-    send(playerId, id);
+  const sendCharacter = async (id: number) => {
+    const res = await send(id);
+    setTradeLink(res.trade_link);
+    getGameStatus();
+    // @ts-ignore
+    sellSendConfirmModalRef.current?.click();
+    // @ts-ignore
+    modalRef.current?.click();
+
   }
 
   return (
@@ -92,10 +107,10 @@ export default function MyCollection() {
           {
             characters?.results?.map((character: ICharacter, index: number) => {
               return (
-                <div key={index} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md" onClick={() => onCharacterClick(character)}>
+                <div key={index} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md" onClick={() => character.is_claimed ? onCharacterClick(character) : {}}>
                   <div className="flex items-center gap-2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={character.image_url} alt="goku" className="rounded-md h-[60px] w-[70px]" />
+                    <img src={character.image_url} alt="goku" className={`rounded-md h-[60px] w-[70px] ${ character.is_claimed ? 'grayscale-0' : 'grayscale' }`} />
                     <div className="flex flex-col justify-between items-start h-[60px]">
                       <span className="text-xs font-bold">{ character.title }</span>
                       <span className="text-xs">{ character.name }</span>
@@ -111,6 +126,7 @@ export default function MyCollection() {
         </div> </> : <SellSendCard sell={() => onAction('sell')} send={() => onAction('send')} character={selectedCharacter} back={() => setShowCard(false)} />
       }
       <SellSendConfirmModal ref={modalRef} onConfirm={() => action === 'sell' ? sellCharacter(selectedCharacter.id) : sendCharacter(selectedCharacter.id)} action={action} />
+      <ConfirmModal ref={sellSendConfirmModalRef} eventType={action === 'sell' ? 'Sold' : 'Sent'} message={action === 'send' ? tradeLink : ''} onConfirm={() => setShowCard(false)} />
     </main>
   );
 }

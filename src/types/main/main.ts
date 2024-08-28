@@ -20,3 +20,7 @@ export interface ICharacter {
     is_claimed: false;
 }
 
+export interface ISendCharacter {
+    trade_link: string;
+}
+

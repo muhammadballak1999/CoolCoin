@@ -11,6 +11,8 @@ import { useAuthStore } from "@/stores";
 import { IVerifyUserPayload } from "@/types";
 import { LocalStorageService } from "@/services";
 import { Statistics } from "./components/global/Statistics";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -104,6 +106,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Content />
+        <ToastContainer />
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import { useWindowSize } from "./hooks/useWindowsSize";
 import { useRef, useState } from "react";
-import { ClaimModal } from "./components/modals/ClaimModal";
+import { ConfirmModal } from "./components/modals/ConfirmModal";
 import { ClaimCard } from "./components/global/ClaimCard";
 import lottie from 'lottie-web';
 import { useMainStore } from "@/stores";
@@ -53,7 +53,7 @@ export default function Home() {
     modalRef.current?.click();
   }
 
-  const onConfirmClaimModal = () => {
+  const onConfirmModal = () => {
     setIsRolled(false);
     getGameStatus();
   }
@@ -103,7 +103,7 @@ export default function Home() {
           }
         </div>
       </main>
-      <ClaimModal ref={modalRef} onConfirm={onConfirmClaimModal} />
+      <ConfirmModal ref={modalRef} eventType="Claimed" onConfirm={onConfirmModal} />
     </>
   );
 }

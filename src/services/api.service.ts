@@ -1,4 +1,4 @@
-import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse, ISendCharacter } from '@/types';
 import { AxiosService } from './axios.service';
 import {
     IVerifyUserPayload,
@@ -38,12 +38,12 @@ export class ApiService {
     return this.axiosService.post<ICharacter>(`character/${characterId}/claim/`);
   }
 
-  async sell(playerId: number, itemId: number) {
-    return this.axiosService.post<ICharacter>(`player/${playerId}/collection/${itemId}/sell/`);
+  async sell(itemId: number) {
+    return this.axiosService.post<ICharacter>(`player/collection/${itemId}/sell/`);
   }
 
-  async send(playerId: number, itemId: number) {
-    return this.axiosService.post<ICharacter>(`player/${playerId}/collection/${itemId}/send/`);
+  async send(itemId: number) {
+    return this.axiosService.post<ISendCharacter>(`player/collection/${itemId}/send/`);
   }
 
   async getEarnActivities() {

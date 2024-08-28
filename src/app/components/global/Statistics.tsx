@@ -56,7 +56,7 @@ export const Statistics = () => {
             </div>
             <div className="flex flex-col items-center rounded-md p-3 w-full relative">
               <Image src={EmojiMedium} alt="small emoji" className="absolute left-[20%]" />
-              <span className="font-bold text-3xl">{ totalCoins || 0 }</span>
+              <span className="font-bold text-3xl">{ formatNumber(totalCoins) }</span>
             </div>
           </div>
     )

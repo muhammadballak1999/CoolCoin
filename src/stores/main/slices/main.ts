@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 
 import { CommonStoreState, actionWrapper } from '../../common';
 import { ApiService } from '@/services';
-import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse, ISendCharacter } from '@/types';
 
 export interface MainSliceState extends CommonStoreState {
   nextClaimTimeSecond: number;
@@ -17,8 +17,8 @@ export interface MainSliceState extends CommonStoreState {
   getCharacters: (renew: boolean, params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
   roll: () => Promise<ICharacter>;
   claim: (characterId: number) => Promise<ICharacter>;
-  sell: (playerId: number, itemId: number) => Promise<ICharacter>;
-  send: (playerId: number, itemId: number) => Promise<ICharacter>;
+  sell: (itemId: number) => Promise<ICharacter>;
+  send: (itemId: number) => Promise<ISendCharacter>;
   getEarnActivities: () => Promise<ICharacter>;
   earn: (activityId: number) => Promise<ICharacter>;
 }
@@ -80,17 +80,17 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
     });
   },
 
-  sell: async (playerId: number, itemId: number) => {
+  sell: async (itemId: number) => {
     return actionWrapper(set, async () => {
-      const res = await ApiService.getInstance().sell(playerId, itemId);
+      const res = await ApiService.getInstance().sell(itemId);
 
       return res.data
     });
   },
 
-  send: async (playerId: number, itemId: number) => {
+  send: async (itemId: number) => {
     return actionWrapper(set, async () => {
-      const res = await ApiService.getInstance().send(playerId, itemId);
+      const res = await ApiService.getInstance().send(itemId);
 
       return res.data
     });

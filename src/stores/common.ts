@@ -1,6 +1,5 @@
 import { StoreApi } from 'zustand';
-
-// import { showToast } from '@/components';
+import { toast } from 'react-toastify';
 
 export interface CommonStoreState {
   error?: Error | null;
@@ -43,11 +42,9 @@ export const actionWrapper = async <A>(set: StoreApi<CommonStoreState>['setState
   } catch (err: unknown) {
     set(() => ({ error: err as Error }));
 
-    // showToast({
-    //   type: 'error',
-    //   title: 'Error',
-    //   text: getErrorMessage(err),
-    // });
+    toast(getErrorMessage(err), {
+      type: 'error',
+    });
 
     throw err;
   } finally {
