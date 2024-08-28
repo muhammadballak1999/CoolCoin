@@ -2,9 +2,10 @@ import React from 'react';
 import Countdown from 'react-countdown';
 
 interface IProps {
+    index: number;
     seconds: number;
     completionText?: string;
-    onClick: () => void;
+    onClick: (index: number) => void;
   }
 
   const unclaimedClasses = 'bg-red-500 hover:bg-red-500 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-3xl text-xs p-2 dark:bg-red-500 dark:hover:bg-red-400 dark:focus:ring-red-400 dark:border-red-400';
@@ -20,14 +21,15 @@ export const TimedClaimButton = React.memo((props: IProps) => {
     return (
     <Countdown
         date={Date.now() + (props.seconds * 1000)}
-        renderer={({ seconds, completed }) => {
+        zeroPadTime={2}
+        renderer={({ formatted: { minutes, seconds }, completed }) => {
             
             if (completed) {
               // Render a completed state
               return <Completionist />;
             } else {
               // Render a countdown
-              return <button className={timedClaimClasses} onClick={props.onClick}>Claim - {seconds}s</button>;
+              return <button className={timedClaimClasses} onClick={() => props.onClick(props.index)}>{minutes}:{seconds}</button>;
             }
         }}
     />

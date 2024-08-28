@@ -1,4 +1,4 @@
-import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse, ISendCharacter } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, ILoot, IPaginatedResponse, ISendCharacter } from '@/types';
 import { AxiosService } from './axios.service';
 import {
     IVerifyUserPayload,
@@ -28,6 +28,10 @@ export class ApiService {
 
   async getCharacters(params?: ICharacterQuery) {
     return this.axiosService.get<IPaginatedResponse<ICharacter>>('character/', { params });
+  }
+
+  async getLootCharacters(params?: ICharacterQuery) {
+    return this.axiosService.get<ILoot[]>('game/recent-rolls/', { params });
   }
 
   async roll() {

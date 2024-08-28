@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 
 import { CommonStoreState, actionWrapper } from '../../common';
 import { ApiService } from '@/services';
-import { ICharacter, ICharacterQuery, IGameStatus, IPaginatedResponse, ISendCharacter } from '@/types';
+import { ICharacter, ICharacterQuery, IGameStatus, ILoot, IPaginatedResponse, ISendCharacter } from '@/types';
 
 export interface MainSliceState extends CommonStoreState {
   nextClaimTimeSecond: number;
@@ -10,17 +10,21 @@ export interface MainSliceState extends CommonStoreState {
   profitPerHour: number;
   rollsLeft: number;
   totalCoins: number;
+  collectionCount: number;
 
   characters: IPaginatedResponse<ICharacter>,
+  lootCharacters: ILoot[],
 
   getGameStatus: () => Promise<IGameStatus | undefined>;
   getCharacters: (renew: boolean, params?: ICharacterQuery) => Promise<IPaginatedResponse<ICharacter | null>>;
+  getLootCharacters: (params?: ICharacterQuery) => Promise<ILoot[]>;
   roll: () => Promise<ICharacter>;
   claim: (characterId: number) => Promise<ICharacter>;
   sell: (itemId: number) => Promise<ICharacter>;
   send: (itemId: number) => Promise<ISendCharacter>;
   getEarnActivities: () => Promise<ICharacter>;
   earn: (activityId: number) => Promise<ICharacter>;
+  updateTimedClaim: (index: number) => void;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
@@ -31,7 +35,9 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   profitPerHour: 0,
   rollsLeft: 0,
   totalCoins: 0,
+  collectionCount: 0,
   characters: null!,
+  lootCharacters: [],
 
   getGameStatus: async () => {
     return actionWrapper(set, async () => {
@@ -42,6 +48,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
         rollsLeft: res.data.rolls_left,
         profitPerHour: res.data.profit_per_hour,
         totalCoins: res.data.total_coins,
+        collectionCount: res.data.collection_count,
       })
       return res.data
     });
@@ -64,6 +71,16 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
     });
   },
 
+  getLootCharacters: async (params?: ICharacterQuery) => {
+    return actionWrapper(set, async () => {
+      const res = await ApiService.getInstance().getLootCharacters(params);
+
+      set({lootCharacters:  res.data });
+      
+      return res.data
+    });
+  },
+
   roll: async () => {
     return actionWrapper(set, async () => {
       const res = await ApiService.getInstance().roll();
@@ -77,6 +94,15 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
       const res = await ApiService.getInstance().claim(characterId);
 
       return res.data
+    });
+  },
+
+  updateTimedClaim: async (index: number) => {
+    return actionWrapper(set, async () => {
+      set((state) => ({
+        lootCharacters: state.lootCharacters.map((loot, i) => index === i ? { ...loot, claimed_by_player: state.playerId} : loot)
+      }))
+    return true;
     });
   },
 
