@@ -21,7 +21,7 @@ export const LootListItem = React.memo((props: { loot: ILoot, i: number; }) => {
   return (
     <div key={props.i} className="h-[70px] border p-1 my-2 flex items-center justify-between rounded-md">
     <div className="flex items-center gap-2">
-      <Image src={Goku} alt="goku" className="rounded-md h-[60px] w-[70px]" />
+      <img src={props.loot.character.image_url} alt="anime-character" className="rounded-md h-[60px] w-[70px]" />
       <div className="flex flex-col justify-between items-start h-[60px] min-w-[100px] max-w-[100px]">
         <span className="text-xs font-bold text-nowrap text-ellipsis overflow-hidden max-w-[100px]">{ props.loot.character.title }</span>
         <span className="text-xs text-nowrap text-ellipsis overflow-hidden max-w-[100px]">{ props.loot.character.name }</span>

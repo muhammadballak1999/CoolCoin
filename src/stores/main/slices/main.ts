@@ -6,6 +6,7 @@ import { ICharacter, ICharacterQuery, IGameStatus, ILoot, IPaginatedResponse, IS
 
 export interface MainSliceState extends CommonStoreState {
   nextClaimTimeSecond: number;
+  nextRollTimeSecond: number;
   playerId: number;
   profitPerHour: number;
   rollsLeft: number;
@@ -31,6 +32,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   set,
 ) => ({
   nextClaimTimeSecond: 0,
+  nextRollTimeSecond: 0,
   playerId: 0,
   profitPerHour: 0,
   rollsLeft: 0,
@@ -44,6 +46,7 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
       const res = await ApiService.getInstance().getGameStatus();
       set({
         nextClaimTimeSecond: res.data.next_claim_time_second,
+        nextRollTimeSecond: res.data.next_roll_time_second,
         playerId: res.data.player_id,
         rollsLeft: res.data.rolls_left,
         profitPerHour: res.data.profit_per_hour,

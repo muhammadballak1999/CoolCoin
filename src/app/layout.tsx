@@ -75,7 +75,7 @@ export default function RootLayout({
   // @ts-ignore
   const verifyUser = (data) => {
     if(process.env.NODE_ENV === 'development') {
-      LocalStorageService.getInstance().setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI0ODY2MTY5LCJqdGkiOiJiYjk3YmQzYjU5NDE0ZWVhYjNmNWM4N2U4N2FkMDc0YiIsInVzZXJfaWQiOjF9.-bAncT5TTe8gz0a5lm-XWXYgY0fzY1KLNm-kczKiC48');
+      LocalStorageService.getInstance().setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NDg3NTI0LCJqdGkiOiIwOGVkMjM5ZTdiNmI0YjQyYTJiZGVhYzM1NDg0MGMyNyIsInVzZXJfaWQiOjF9.zTz2GBBHKaXXCg9ggCeupbayXgHbzZLCeppw-d6RFtQ');
       return
     }
     authStore.verifyUser({ initData: data })

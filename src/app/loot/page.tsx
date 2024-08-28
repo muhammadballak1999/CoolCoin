@@ -9,12 +9,12 @@ export default function Loot() {
 
   const { lootCharacters, getLootCharacters, isLoading } = useMainStore();
 
-  const fetchLootCharacters = () => {
-    getLootCharacters();
-  } 
-
   useEffect(() => {
     getLootCharacters();
+    // const interval = setInterval(() => {
+      // getLootCharacters();
+    // }, 5000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (

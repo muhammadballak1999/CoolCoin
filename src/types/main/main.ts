@@ -1,6 +1,7 @@
 import { IPaginationQuery } from '../common';
 export interface IGameStatus {
     next_claim_time_second: number;
+    next_roll_time_second: number;
     player_id: number;
     profit_per_hour: number;
     rolls_left: number;
