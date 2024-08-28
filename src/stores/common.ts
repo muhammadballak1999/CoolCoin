@@ -18,6 +18,8 @@ export interface APIError {
 const getErrorMessage = (err: unknown) => {
   const apiError = err as APIError;
 
+  console.log('apierror', apiError)
+
   if (apiError?.data) {
     return JSON.stringify(apiError.data);
   }
@@ -44,6 +46,9 @@ export const actionWrapper = async <A>(set: StoreApi<CommonStoreState>['setState
 
     toast(getErrorMessage(err), {
       type: 'error',
+      style: {
+        maxHeight: '100px'
+      }
     });
 
     throw err;
