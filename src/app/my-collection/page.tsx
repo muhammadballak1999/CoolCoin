@@ -35,7 +35,7 @@ export default function MyCollection() {
   const nameUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPage(0);
     setName(e.target.value);
-    fetchCharacters(true, page, e.target.value);
+    fetchCharacters(true, 0, e.target.value);
   }
 
   const fetchCharacters = debounce((renew: boolean, page?: number, name?: string) => {
@@ -65,6 +65,8 @@ export default function MyCollection() {
     sellSendConfirmModalRef.current?.click();
     // @ts-ignore
     modalRef.current?.click();
+
+    fetchCharacters(true, 1, name);
   }
 
   const sendCharacter = async (id: number) => {
@@ -76,6 +78,7 @@ export default function MyCollection() {
     // @ts-ignore
     modalRef.current?.click();
 
+    fetchCharacters(true, 1, name);
   }
 
   return (
