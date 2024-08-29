@@ -27,7 +27,7 @@ export interface ICharacter {
 }
 
 export interface ISendCharacter {
-    trade_link: string;
+    redeem_link: string;
 }
 
 export interface IClaimPayload {

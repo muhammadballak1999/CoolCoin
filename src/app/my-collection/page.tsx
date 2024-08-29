@@ -15,7 +15,7 @@ export default function MyCollection() {
   const [page, setPage] = useState(1);
   const [name, setName] = useState('');
   const [action, setAction] = useState('');
-  const [tradeLink, setTradeLink] = useState('');
+  const [redeemLink, setRedeemLink] = useState('');
   const [selectedCharacter, setSelectedCharacter] = useState<ICharacter>(null!);
   const modalRef = useRef(null);
   const sellSendConfirmModalRef = useRef(null);
@@ -71,7 +71,7 @@ export default function MyCollection() {
 
   const sendCharacter = async (id: number) => {
     const res = await send(id);
-    setTradeLink(res.trade_link);
+    setRedeemLink(res.redeem_link);
     getGameStatus();
     // @ts-ignore
     sellSendConfirmModalRef.current?.click();
@@ -129,7 +129,7 @@ export default function MyCollection() {
         </div> </> : <SellSendCard sell={() => onAction('sell')} send={() => onAction('send')} character={selectedCharacter} back={() => setShowCard(false)} />
       }
       <SellSendConfirmModal ref={modalRef} onConfirm={() => action === 'sell' ? sellCharacter(selectedCharacter.id) : sendCharacter(selectedCharacter.id)} action={action} />
-      <ConfirmModal ref={sellSendConfirmModalRef} eventType={action === 'sell' ? 'Sold' : 'Sent'} message={action === 'send' ? tradeLink : ''} onConfirm={() => setShowCard(false)} />
+      <ConfirmModal ref={sellSendConfirmModalRef} eventType={action === 'sell' ? 'Sold' : 'Sent'} message={action === 'send' ? redeemLink : ''} onConfirm={() => setShowCard(false)} />
     </main>
   );
 }

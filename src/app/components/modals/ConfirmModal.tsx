@@ -58,13 +58,13 @@ export const ConfirmModal = React.forwardRef((props: IProps, modalRef) => {
           ?
           <span className="text-center flex font-bold text-xl">🎉 <br /> { props.eventType }</span>
           :
-          <span className="text-center flex font-bold text-xl">Copy below link and sent it to the recepient player</span> 
+          <span className="text-center flex font-bold text-xl">Copy below code and sent it to the recepient player</span> 
         }
           { props.eventType === 'Sent'
           ?
-          <div className="flex flex-row items-center justify-center shadow-none px-5 mt-2">
+          <div className="flex flex-row items-center justify-center shadow-none px-5 mt-2 border" onClick={copy}>
              <span className="text-ellipsis text-nowrap overflow-hidden text-xs w-28">{ props.message }</span>
-             <button type="button" className="focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2" onClick={copy}>
+             <button type="button" className="focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" strokeLinejoin="round" strokeWidth="2" d="M9 8v3a1 1 0 0 1-1 1H5m11 4h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v1m4 3v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-7.13a1 1 0 0 1 .24-.65L7.7 8.35A1 1 0 0 1 8.46 8H13a1 1 0 0 1 1 1Z"/>
                 </svg>

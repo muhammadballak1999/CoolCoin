@@ -60,18 +60,19 @@ export default function Home() {
   }
 
   const redeemCharacter = async () => {
-    // let payload = prompt("Please enter character guid");
+    let payload = prompt("Please enter character guid");
 
-    // if (payload !== null) {
-    //   redeem(payload).then((res) => {
-    //     console.log(res);
-    //     toast('Character Claimed Successfully', { type: 'success' });
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //     toast('Wrong guid!', { type: 'error' });
-    //   })
-    // }
+    if (payload !== null) {
+      redeem(payload).then((res) => {
+        console.log(res);
+        toast('Character Claimed Successfully', { type: 'success' });
+        getGameStatus();
+      })
+      .catch(e => {
+        console.log(e);
+        toast('Wrong guid!', { type: 'error' });
+      })
+    }
   }
 
 
