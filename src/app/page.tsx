@@ -60,7 +60,7 @@ export default function Home() {
   }
 
   const redeemCharacter = async () => {
-    let payload = prompt("Please enter character guid");
+    let payload = prompt("Please enter the redeem code");
 
     if (payload !== null) {
       redeem(payload).then((res) => {
@@ -70,7 +70,7 @@ export default function Home() {
       })
       .catch(e => {
         console.log(e);
-        toast('Wrong guid!', { type: 'error' });
+        // toast('Wrong guid!', { type: 'error' });
       })
     }
   }
