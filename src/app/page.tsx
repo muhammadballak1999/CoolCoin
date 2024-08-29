@@ -65,7 +65,7 @@ export default function Home() {
     if (payload !== null) {
       redeem(payload).then((res) => {
         console.log(res);
-        toast('Character Claimed Successfully', { type: 'success' });
+        toast('Character Reedemed Successfully', { type: 'success' });
         getGameStatus();
       })
       .catch(e => {
