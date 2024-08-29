@@ -59,6 +59,6 @@ export class ApiService {
   }
 
   async redeem(guid: string) {
-    return this.axiosService.post<ICharacter>('trading/redeem-code/',  { redeem_link: guid });
+    return this.axiosService.post<ICharacter>('trading/redeem-code/',  { guid });
   }
 }
