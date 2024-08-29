@@ -57,4 +57,8 @@ export class ApiService {
   async earn(activityId: number) {
     return this.axiosService.post<ICharacter>(`earn/activity/${activityId}/complete/`);
   }
+
+  async redeem(guid: string) {
+    return this.axiosService.post<ICharacter>('trading/redeem-code/',  { redeem_code: guid });
+  }
 }

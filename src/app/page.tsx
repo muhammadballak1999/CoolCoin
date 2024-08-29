@@ -20,7 +20,7 @@ export default function Home() {
   const [isRolling, setIsRolling] = useState(false);
   const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
 
-  const { roll, claim, getGameStatus, nextClaimTimeSecond, nextRollTimeSecond, rollsLeft, isLoading } = useMainStore();
+  const { roll, claim, redeem, getGameStatus, nextClaimTimeSecond, nextRollTimeSecond, rollsLeft, isLoading } = useMainStore();
 
 
   const gameRoll = async () => {
@@ -59,12 +59,19 @@ export default function Home() {
     getGameStatus();
   }
 
-  const redeemCharacter = () => {
-    let payload = prompt("Please enter character guid");
+  const redeemCharacter = async () => {
+    // let payload = prompt("Please enter character guid");
 
-    if (payload !== null) {
-      toast('Character Claimed Successfully', { type: 'success' });
-    }
+    // if (payload !== null) {
+    //   redeem(payload).then((res) => {
+    //     console.log(res);
+    //     toast('Character Claimed Successfully', { type: 'success' });
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //     toast('Wrong guid!', { type: 'error' });
+    //   })
+    // }
   }
 
 
@@ -92,7 +99,7 @@ export default function Home() {
                   <CountdownTimer seconds={nextClaimTimeSecond} onFinish={() => getGameStatus()} />
                 </div>
               : rollsLeft ?
-                <div className={'bg-[#FFFB1F] flex items-center justify-center rounded-full h-40 w-40 text-black'} onClick={gameRoll}>
+                <div className={'bg-[#FFFB1F] glow flex items-center justify-center rounded-full h-40 w-40 text-black font-bold'} onClick={gameRoll}>
                   Roll
                 </div>
                 : 

@@ -26,6 +26,7 @@ export interface MainSliceState extends CommonStoreState {
   getEarnActivities: () => Promise<ICharacter>;
   earn: (activityId: number) => Promise<ICharacter>;
   updateTimedClaim: (index: number) => void;
+  redeem: (guid: string) => Promise<ICharacter>;
 }
 
 export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceState> = (
@@ -135,6 +136,13 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   earn: async (activityId: number) => {
     return actionWrapper(set, async () => {
       const res = await ApiService.getInstance().earn(activityId);
+
+      return res.data
+    });
+  },
+  redeem: async (guid: string) => {
+    return actionWrapper(set, async () => {
+      const res = await ApiService.getInstance().redeem(guid);
 
       return res.data
     });
