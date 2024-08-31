@@ -93,14 +93,14 @@ export default function MyCollection() {
             </div>
             <input value={name} type="search" id="search" className="block bg-transparent text-white w-full h-10 p-5 ps-10 text-sm placeholder-white border border-gray-200 rounded-lg dark:placeholder-gray-400 dark:text-white" placeholder="Search Ranks & Characters" required onChange={nameUpdate} />
         </div>
-        <div className="scrollable-div w-full mt-5 p-2 h-full">
+        <div className="scrollable-div w-full mt-2 p-2 h-full">
 
         <InfiniteScroll
           dataLength={page * 20} //This is important field to render the next data
           next={pageUpdate}
           hasMore={characters?.results?.length < characters?.count}
           loader={<h4>Loading...</h4>}
-          height={'67vh'}
+          height={'65vh'}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               { characters?.results?.length ? <b>Yay! You have seen it all</b> : <></> }
