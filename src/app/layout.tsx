@@ -87,7 +87,7 @@ export default function RootLayout({
         <SplashScreen finishLoading={() => setIsLoading(false)} />
       ) : (
         <>
-          <div className="h-[92%] overflow-auto">
+          <div className="h-[92%]">
             <Statistics />
             {children}
             <div className="stars"></div>
