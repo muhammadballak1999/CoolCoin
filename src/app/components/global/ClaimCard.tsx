@@ -16,8 +16,8 @@ export const ClaimCard = (props: IProps) => {
   const [claimDisabled, setClaimDisabled] = useState(false);
 
     return (
-      <div className="flex w-fit rounded-md mt-4">
-        <div className="flex flex-col w-full items-center justify-between rounded-md">
+      <div className="flex w-fit rounded-md mt-4 h-full">
+        <div className="flex flex-col w-full items-center rounded-md">
           <div className='h-fit w-fit flex flex-col items-center justify-between bg-black'>
             <div className='px-2 pt-3 w-full'>
                 <div className='bg-[#F0F2E1] h-10 flex items-center justify-between rounded-md w-full'>
