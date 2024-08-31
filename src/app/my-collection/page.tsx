@@ -100,7 +100,7 @@ export default function MyCollection() {
           next={pageUpdate}
           hasMore={characters?.results?.length < characters?.count}
           loader={<h4>Loading...</h4>}
-          height={'50vh'}
+          height={'67vh'}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               { characters?.results?.length ? <b>Yay! You have seen it all</b> : <></> }
