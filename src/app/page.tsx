@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col items-center px-5 pt-[125px] overflow-auto relative z-10">
+      <main className="flex flex-col items-center px-5 pt-[125px] relative z-10">
       <div className="mt-10">
           {
             !isRolled && !isRolling
