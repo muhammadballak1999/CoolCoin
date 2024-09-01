@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { ConfirmModal } from "./components/modals/ConfirmModal";
 import { ClaimCard } from "./components/global/ClaimCard";
 import lottie from 'lottie-web';
-import { useMainStore } from "@/stores";
+import { useAuthStore, useMainStore } from "@/stores";
 import { ICharacter } from "@/types";
 import { CountdownTimer } from "./components/global/Countdown";
 import { toast } from "react-toastify";
@@ -21,6 +21,7 @@ export default function Home() {
   const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
 
   const { roll, claim, redeem, getGameStatus, nextClaimTimeSecond, nextRollTimeSecond, rollsLeft, isLoading } = useMainStore();
+  const { user } = useAuthStore();
 
 
   const gameRoll = async () => {
@@ -75,6 +76,10 @@ export default function Home() {
     }
   }
 
+  const onBoost = () => {
+    window.open(`${process.env.NEXT_PUBLIC_STRIPE_TEST_URL}?client_reference_id=${user?.username}`, '_self');
+  }
+
 
   return (
     <>
@@ -83,7 +88,7 @@ export default function Home() {
           {
             !isRolled && !isRolling
             ?
-              <button type="button" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Boost to claim more</button>
+              <button type="button" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={onBoost}>Boost to claim more</button>
             :
               <></>
           }

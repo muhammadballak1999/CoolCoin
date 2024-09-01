@@ -21,8 +21,6 @@ export const useAuthStore = create<AuthStoreState>()(
         return actionWrapper(set, async () => {
           const res = await ApiService.getInstance().verifyUser(payload);
 
-          console.log('res', res)
-
           LocalStorageService.getInstance().setToken(res.data.access_token!);
           set(() => ({ isLoggedIn: !!res.data.access_token }));
 
