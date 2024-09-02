@@ -77,7 +77,7 @@ export default function Home() {
   }
 
   const onBoost = () => {
-    window.open(`${process.env.NEXT_PUBLIC_STRIPE_TEST_URL}?client_reference_id=${user?.id}`, '_self');
+    window.open(`${process.env.NEXT_PUBLIC_STRIPE_TEST_URL}?client_reference_id=${user?.id}`, '_blank');
   }
 
 
