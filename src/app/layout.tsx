@@ -62,6 +62,7 @@ export default function RootLayout({
 
           // @ts-ignore
           setUserData(window.Telegram.WebApp.initDataUnsafe?.user);
+          console.log(userData);
           // console.log('user', user);
           verifyUser(initData);
         };
