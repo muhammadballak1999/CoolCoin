@@ -8,7 +8,7 @@ import { CommonStoreState, actionWrapper } from '../common';
 interface AuthStoreState extends CommonStoreState {
   user?: IUser | null;
   isLoggedIn: boolean;
-  verifyUser: (payload: IVerifyUserPayload) => Promise<IVerifyUserResponse | undefined>;
+  verifyUser: (payload: IVerifyUserPayload, id: number) => Promise<IVerifyUserResponse | undefined>;
 }
 
 export const useAuthStore = create<AuthStoreState>()(
@@ -17,12 +17,18 @@ export const useAuthStore = create<AuthStoreState>()(
       user: null,
       isLoggedIn: false,
 
-      verifyUser: async (payload: IVerifyUserPayload) => {
+      verifyUser: async (payload: IVerifyUserPayload, id: number) => {
         return actionWrapper(set, async () => {
           const res = await ApiService.getInstance().verifyUser(payload);
 
           LocalStorageService.getInstance().setToken(res.data.access_token!);
           set(() => ({ isLoggedIn: !!res.data.access_token }));
+          set((state) => ({
+            user: {
+              ...state.user!,
+              id,
+            }
+          }));
 
           return res.data;
         });
