@@ -90,7 +90,7 @@ export default function Home() {
             ?
               (isBoostActive
               ?
-               <div className="flex items-center text-black rounded-full p-2 text-[#FFFB1F] glow">
+               <div className="flex items-center rounded-full p-2 text-[#FFFB1F] glow">
                 <span className="mr-1">Boost ends in</span>
                 <CountdownTimer seconds={boostEndsAtSeconds} onFinish={() => {}} completionNode={ <span></span> } />
                </div>
