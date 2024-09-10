@@ -7,6 +7,8 @@ export interface IGameStatus {
     rolls_left: number;
     total_coins: number;
     collection_count: number;
+    is_boost_active: boolean;
+    boost_ends_at_seconds: number;
 }
 
 export interface ICharacterQuery extends IPaginationQuery {

@@ -20,7 +20,7 @@ export default function Home() {
   const [isRolling, setIsRolling] = useState(false);
   const [characterToClaim, setCharacterToClaim] = useState<ICharacter>(null!);
 
-  const { roll, claim, redeem, getGameStatus, nextClaimTimeSecond, nextRollTimeSecond, rollsLeft, isLoading } = useMainStore();
+  const { roll, claim, redeem, getGameStatus, isBoostActive, boostEndsAtSeconds, nextClaimTimeSecond, nextRollTimeSecond, rollsLeft, isLoading } = useMainStore();
   const { user } = useAuthStore();
 
 
@@ -88,7 +88,15 @@ export default function Home() {
           {
             !isRolled && !isRolling
             ?
+              (isBoostActive
+              ?
+               <div className="flex items-center text-black rounded-full p-2 text-[#FFFB1F] glow">
+                <span className="mr-1">Boost ends in</span>
+                <CountdownTimer seconds={boostEndsAtSeconds} onFinish={() => {}} completionNode={ <span></span> } />
+               </div>
+              : 
               <button type="button" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-3xl text-xs p-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={onBoost}>Boost to claim more</button>
+              )
             :
               <></>
           }

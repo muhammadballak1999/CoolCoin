@@ -63,7 +63,7 @@ export default function RootLayout({
           // @ts-ignore
           setUserData(window.Telegram.WebApp.initDataUnsafe?.user);
           // console.log('user', user);
-          verifyUser(initData, (JSON.parse(params.get('user')!)).id);
+          verifyUser(initData, (JSON.parse(params.get('user')!))?.id);
         };
         document.head.appendChild(script);
       }
@@ -75,7 +75,7 @@ export default function RootLayout({
   // @ts-ignore
   const verifyUser = (data, id) => {
     if(process.env.NODE_ENV === 'development') {
-      LocalStorageService.getInstance().setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NDg3NTI0LCJqdGkiOiIwOGVkMjM5ZTdiNmI0YjQyYTJiZGVhYzM1NDg0MGMyNyIsInVzZXJfaWQiOjF9.zTz2GBBHKaXXCg9ggCeupbayXgHbzZLCeppw-d6RFtQ');
+      LocalStorageService.getInstance().setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2NTY5MjQ1LCJqdGkiOiI1MTY3NmY5N2EwNjI0N2QxYTcwNWViNDhmZjJhY2IwZiIsInVzZXJfaWQiOjZ9.JNtQqK9gDdnjJEgfPktP6y9YJHFUpjFTQbzDwdsjUgw');
       return
     }
     authStore.verifyUser({ initData: data }, id)

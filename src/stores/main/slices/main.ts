@@ -12,6 +12,8 @@ export interface MainSliceState extends CommonStoreState {
   rollsLeft: number;
   totalCoins: number;
   collectionCount: number;
+  isBoostActive: boolean;
+  boostEndsAtSeconds: number;
 
   characters: IPaginatedResponse<ICharacter>,
   lootCharacters: ILoot[],
@@ -41,6 +43,8 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
   collectionCount: 0,
   characters: null!,
   lootCharacters: [],
+  isBoostActive: false,
+  boostEndsAtSeconds: 0,
 
   getGameStatus: async () => {
     return actionWrapper(set, async () => {
@@ -53,6 +57,8 @@ export const createMainSlice: StateCreator<MainSliceState, [], [], MainSliceStat
         profitPerHour: res.data.profit_per_hour,
         totalCoins: res.data.total_coins,
         collectionCount: res.data.collection_count,
+        isBoostActive: res.data.is_boost_active,
+        boostEndsAtSeconds: res.data.boost_ends_at_seconds,
       })
       return res.data
     });
